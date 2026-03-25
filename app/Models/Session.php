@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Session extends Model
 {
+    protected $table = 'chat_sessions';
+
     protected $fillable = [
         'visitor_id', 'website_id', 'assigned_user_id',
         'status', 'channel', 'subject', 'unread_count', 'last_message_at',

@@ -100,7 +100,7 @@ return new class extends Migration
         });
 
         // ─── Sessions (chat sessions) ──────────────────────────────────────
-        Schema::create('sessions', function (Blueprint $table) {
+        Schema::create('chat_sessions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('visitor_id')->constrained('visitors')->cascadeOnDelete();
             $table->foreignId('website_id')->constrained('websites')->cascadeOnDelete();
@@ -120,7 +120,7 @@ return new class extends Migration
         Schema::create('visitor_pages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('visitor_id')->constrained('visitors')->cascadeOnDelete();
-            $table->foreignId('session_id')->nullable()->constrained('sessions')->nullOnDelete();
+            $table->foreignId('session_id')->nullable()->constrained('chat_sessions')->nullOnDelete();
             $table->string('url', 2000)->nullable();
             $table->string('path', 500)->nullable();
             $table->string('title', 500)->nullable();
@@ -132,7 +132,7 @@ return new class extends Migration
         // ─── Messages ──────────────────────────────────────────────────────
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('session_id')->constrained('sessions')->cascadeOnDelete();
+            $table->foreignId('session_id')->constrained('chat_sessions')->cascadeOnDelete();
             $table->string('sender_type', 20); // visitor, agent, system, ai
             $table->foreignId('sender_user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->text('content');
@@ -162,7 +162,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('website_id')->constrained('websites')->cascadeOnDelete();
             $table->foreignId('visitor_id')->nullable()->constrained('visitors')->nullOnDelete();
-            $table->foreignId('session_id')->nullable()->constrained('sessions')->nullOnDelete();
+            $table->foreignId('session_id')->nullable()->constrained('chat_sessions')->nullOnDelete();
             $table->string('name', 120)->nullable();
             $table->string('email', 180)->nullable();
             $table->string('phone', 40)->nullable();
@@ -287,7 +287,7 @@ return new class extends Migration
         $tables = [
             'admin_sessions', 'ai_feedback', 'ai_knowledge', 'ai_documents', 'ai_faqs',
             'popup_rules', 'canned_replies', 'website_settings', 'settings',
-            'leads', 'attachments', 'messages', 'visitor_pages', 'sessions',
+            'leads', 'attachments', 'messages', 'visitor_pages', 'chat_sessions',
             'visitors', 'user_websites', 'user_companies', 'websites',
             'companies', 'users', 'accounts',
         ];
