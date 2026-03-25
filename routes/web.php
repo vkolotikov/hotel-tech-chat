@@ -2,31 +2,27 @@
 
 use Illuminate\Support\Facades\Route;
 
-// Serve admin panel
-Route::get('/', function () {
-    $adminPath = public_path('admin/index.html');
-    if (file_exists($adminPath)) {
-        return response()->file($adminPath, ['Content-Type' => 'text/html']);
+function serveAdminPage(string $filename = 'index'): \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+{
+    $htmlPath = public_path("admin/{$filename}.html");
+    if (! file_exists($htmlPath)) {
+        $htmlPath = public_path('admin/index.html');
     }
-    return view('welcome');
-});
+    if (! file_exists($htmlPath)) {
+        return response('Admin panel not found.', 404);
+    }
 
-Route::get('/admin', function () {
-    $adminPath = public_path('admin/index.html');
-    if (file_exists($adminPath)) {
-        return response()->file($adminPath, ['Content-Type' => 'text/html']);
-    }
-    return view('welcome');
-});
+    // Inject <base href="/admin/"> so relative asset paths resolve correctly
+    $html = file_get_contents($htmlPath);
+    $html = str_replace('<head>', '<head><base href="/admin/">', $html);
 
-Route::get('/admin/{page}', function (string $page) {
-    $htmlPath = public_path("admin/{$page}.html");
-    if (file_exists($htmlPath)) {
-        return response()->file($htmlPath, ['Content-Type' => 'text/html']);
-    }
-    $adminPath = public_path('admin/index.html');
-    if (file_exists($adminPath)) {
-        return response()->file($adminPath, ['Content-Type' => 'text/html']);
-    }
-    return view('welcome');
-});
+    return response($html, 200, ['Content-Type' => 'text/html; charset=utf-8']);
+}
+
+Route::get('/', fn () => redirect('/admin/'));
+
+Route::get('/admin', fn () => redirect('/admin/'));
+
+Route::get('/admin/', fn () => serveAdminPage('index'));
+
+Route::get('/admin/{page}', fn (string $page) => serveAdminPage($page));
