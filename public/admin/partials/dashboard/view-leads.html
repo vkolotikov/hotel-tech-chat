@@ -1,0 +1,148 @@
+        <section class="view" data-view="leads">
+            <div class="panel">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3>Leads</h3>
+                <a id="export-leads" href="#" class="badge">Export CSV</a>
+              </div>
+              <div class="leads-filters">
+                <div class="leads-filter">
+                  <label for="leads-search">Search</label>
+                  <input id="leads-search" type="search" placeholder="Name, email, company, phone..." />
+                </div>
+                <div class="leads-filter">
+                  <label for="leads-date">Date</label>
+                  <select id="leads-date">
+                    <option value="all">All time</option>
+                    <option value="today">Today</option>
+                    <option value="yesterday">Yesterday</option>
+                    <option value="this_week">This week</option>
+                    <option value="last_week">Previous week</option>
+                    <option value="this_month">This month</option>
+                    <option value="last_month">Previous month</option>
+                    <option value="this_year">This year</option>
+                    <option value="last_year">Last year</option>
+                  </select>
+                </div>
+                <div class="leads-filter">
+                  <label for="leads-importance">Importance</label>
+                  <select id="leads-importance">
+                    <option value="all">All</option>
+                    <option value="important">Important</option>
+                    <option value="not_important">Not important</option>
+                  </select>
+                </div>
+              </div>
+              <table class="leads-table">
+                <thead>
+                  <tr>
+                    <th class="lead-importance">Important</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Company</th>
+                  <th class="lead-mobile">Mobile</th>
+                  <th class="lead-notes">Notes</th>
+                  <th>Date</th>
+                  <th class="lead-actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="leads-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <div id="lead-editor" class="lead-editor" hidden>
+          <div class="lead-editor-card" role="dialog" aria-modal="true" aria-labelledby="lead-editor-title">
+            <header class="lead-editor-header">
+              <div>
+                <h3 id="lead-editor-title">Edit lead</h3>
+                <p>Update contact details and importance</p>
+              </div>
+              <button id="lead-editor-close" class="icon-btn" type="button" aria-label="Close lead editor">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M6 6l12 12M18 6l-12 12"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+            </header>
+            <form id="lead-editor-form" class="lead-editor-form">
+              <div class="lead-editor-grid">
+                <div>
+                  <label for="lead-edit-name">Name</label>
+                  <input id="lead-edit-name" type="text" required />
+                </div>
+                <div>
+                  <label for="lead-edit-email">Email</label>
+                  <input id="lead-edit-email" type="email" required />
+                </div>
+                <div>
+                  <label for="lead-edit-company">Company</label>
+                  <input id="lead-edit-company" type="text" />
+                </div>
+                <div>
+                  <label for="lead-edit-phone">Phone</label>
+                  <input id="lead-edit-phone" type="text" />
+                </div>
+                <div class="lead-editor-wide">
+                  <label for="lead-edit-notes">Notes</label>
+                  <textarea id="lead-edit-notes" rows="3"></textarea>
+                </div>
+              </div>
+              <div class="lead-editor-actions">
+                <label class="important-toggle">
+                  <input id="lead-edit-important" type="checkbox" />
+                  <span>Important</span>
+                </label>
+                <div class="lead-editor-buttons">
+                  <button type="button" class="ghost-btn" id="lead-editor-cancel">Cancel</button>
+                  <button type="submit">Save changes</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div id="ai-feedback-modal" class="ai-feedback-modal" hidden>
+          <div class="ai-feedback-card" role="dialog" aria-modal="true" aria-labelledby="ai-feedback-title">
+            <header class="ai-feedback-header">
+              <div>
+                <h3 id="ai-feedback-title">AI feedback</h3>
+                <p>Help improve AI replies</p>
+              </div>
+              <button id="ai-feedback-close" class="icon-btn" type="button" aria-label="Close AI feedback">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M6 6l12 12M18 6l-12 12"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+            </header>
+            <div class="ai-feedback-message" id="ai-feedback-message"></div>
+            <form id="ai-feedback-form" class="ai-feedback-form">
+              <div class="ai-feedback-actions">
+                <button type="button" class="ai-feedback-btn" id="ai-feedback-helpful">Helpful</button>
+                <button type="button" class="ai-feedback-btn" id="ai-feedback-needs">Needs work</button>
+                <button type="button" class="ai-feedback-save" id="ai-feedback-save">Save feedback</button>
+              </div>
+              <div class="ai-feedback-field">
+                <label for="ai-feedback-note">Note</label>
+                <input id="ai-feedback-note" type="text" placeholder="Add note (optional)" maxlength="500" />
+              </div>
+              <div class="ai-feedback-field" id="ai-feedback-corrected-wrap">
+                <label for="ai-feedback-corrected">Corrected reply</label>
+                <textarea
+                  id="ai-feedback-corrected"
+                  rows="3"
+                  maxlength="2000"
+                  placeholder="Add a corrected reply for preference training"></textarea>
+              </div>
+            </form>
+          </div>
+        </div>
+

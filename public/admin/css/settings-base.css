@@ -1,0 +1,95 @@
+.settings-inline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.inline-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.inline-check input {
+  accent-color: var(--brand);
+}
+
+.settings-inline input {
+  accent-color: var(--brand);
+}
+
+.ai-avatar-row {
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+.ai-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid var(--border-strong);
+  background: rgba(15, 23, 42, 0.6);
+  color: var(--ink);
+  font-weight: 600;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.ai-avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+}
+
+.settings-block {
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px dashed var(--border);
+  background: rgba(15, 23, 42, 0.4);
+  display: grid;
+  gap: 12px;
+}
+
+.hours-grid {
+  display: grid;
+  gap: 8px;
+}
+
+.hours-row {
+  display: grid;
+  grid-template-columns: 70px 36px 1fr 1fr;
+  gap: 8px;
+  align-items: center;
+}
+
+.hours-row label {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.hours-row input[type="checkbox"] {
+  accent-color: var(--brand);
+  width: 18px;
+  height: 18px;
+}
+
+.hours-row input[type="time"] {
+  padding: 6px 8px;
+  border-radius: 10px;
+  border: 1px solid var(--border-strong);
+  background: rgba(15, 23, 42, 0.6);
+  color: var(--ink);
+}
+
+.settings-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 12px 0;
+}
+

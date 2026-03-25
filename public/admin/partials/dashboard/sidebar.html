@@ -1,0 +1,106 @@
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">OC</div>
+          <span class="brand-name">OnlineChat</span>
+        </div>
+        <nav class="nav">
+          <button class="nav-btn" data-view="dashboard" aria-label="Dashboard" title="Dashboard">
+            <span class="nav-icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M3.5 12.5h7v8h-7v-8zm10 0h7v8h-7v-8zm-10-9h7v7h-7v-7zm10 0h7v7h-7v-7z"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+            <span class="nav-label">Dashboard</span>
+          </button>
+          <button class="nav-btn active" data-view="inbox" aria-label="Inbox" title="Inbox">
+            <span class="nav-icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M4 5.5h16a2 2 0 012 2v8a2 2 0 01-2 2h-5l-3 3-3-3H4a2 2 0 01-2-2v-8a2 2 0 012-2z"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+            <span class="nav-label">Inbox</span>
+          </button>
+          <button class="nav-btn" data-view="leads" aria-label="Leads" title="Leads">
+            <span class="nav-icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M7 7a5 5 0 1010 0A5 5 0 007 7zm-3.5 13.5a8.5 8.5 0 0117 0"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </span>
+            <span class="nav-label">Leads</span>
+          </button>
+          <button class="nav-btn" data-view="ai" aria-label="AI" title="AI">
+            <span class="nav-icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M12 3l1.8 4.2L18 9l-4.2 1.8L12 15l-1.8-4.2L6 9l4.2-1.8L12 3z"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linejoin="round"
+                />
+                <path d="M18.5 14.5l.8 2 .2.1-2 .8.8 2-.1.2-1.6-1.2-1.6 1.2-.1-.2.8-2-2-.8.2-.1.8-2h1.8z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="nav-label">AI</span>
+          </button>
+          <button class="nav-btn" data-view="settings" aria-label="Settings" title="Settings">
+            <span class="nav-icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M12 8a4 4 0 100 8 4 4 0 000-8zm8.5 4a8.4 8.4 0 01-.1 1.1l2 1.6-2 3.4-2.4-1a8.7 8.7 0 01-1.9 1.1l-.4 2.5h-4l-.4-2.5a8.7 8.7 0 01-1.9-1.1l-2.4 1-2-3.4 2-1.6a8.4 8.4 0 01-.1-1.1c0-.4 0-.7.1-1.1l-2-1.6 2-3.4 2.4 1c.6-.4 1.2-.8 1.9-1.1l.4-2.5h4l.4 2.5c.7.3 1.3.6 1.9 1.1l2.4-1 2 3.4-2 1.6c.1.4.1.7.1 1.1z"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+            <span class="nav-label">Settings</span>
+          </button>
+        </nav>
+        <div class="sidebar-status">
+          <div class="status-card">
+            <span class="status-label">Online</span>
+            <div class="status-toggle">
+              <label class="switch" for="status-online">
+                <input id="status-online" type="checkbox" />
+                <span class="switch-track" aria-hidden="true"></span>
+              </label>
+              <span id="status-label" class="status-pill">Offline</span>
+            </div>
+          </div>
+          <div class="status-card">
+            <span class="status-label">AI</span>
+            <div class="status-toggle ai-toggle">
+              <label class="switch" for="ai-enabled">
+                <input id="ai-enabled" type="checkbox" />
+                <span class="switch-track" aria-hidden="true"></span>
+              </label>
+              <span id="ai-status" class="status-pill">Off</span>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar-actions">
+          <button id="sound-toggle" type="button" class="icon-toggle" aria-label="Sound: On">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 10h4l5-4v12l-5-4H4v-4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+              <path d="M16 9a4 4 0 010 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M18.5 7a7 7 0 010 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            </svg>
+          </button>
+          <button id="logout-btn" type="button" class="danger-btn">Log out</button>
+        </div>
+      </aside>

@@ -1,0 +1,959 @@
+        <section class="view" data-view="settings">
+          <div class="settings-layout">
+              <div class="settings-tabs settings-wide" id="settings-tabs" role="tablist" aria-label="Settings sections">
+                <button type="button" class="settings-tab-btn is-active" role="tab" aria-selected="true" data-settings-tab="company">
+                  <span class="settings-tab-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M3.8 9.2 12 4l8.2 5.2v8.6A2.2 2.2 0 0 1 18 20H6a2.2 2.2 0 0 1-2.2-2.2V9.2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <span>Company</span>
+                </button>
+                <button type="button" class="settings-tab-btn" role="tab" aria-selected="false" data-settings-tab="personal">
+                  <span class="settings-tab-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="8" r="3.2" stroke="currentColor" stroke-width="1.6"/>
+                      <path d="M5.5 18.5a6.5 6.5 0 0 1 13 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                  <span>Profile</span>
+                </button>
+                <button type="button" class="settings-tab-btn" role="tab" aria-selected="false" data-settings-tab="widget">
+                  <span class="settings-tab-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <rect x="4.2" y="4.2" width="15.6" height="15.6" rx="3.2" stroke="currentColor" stroke-width="1.6"/>
+                      <path d="M8.2 12h7.6M12 8.2v7.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                  <span>Widget</span>
+                </button>
+                <button type="button" class="settings-tab-btn" role="tab" aria-selected="false" data-settings-tab="automation">
+                  <span class="settings-tab-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="M6 12h12M12 6v12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                      <rect x="4" y="4" width="16" height="16" rx="4" stroke="currentColor" stroke-width="1.6"/>
+                    </svg>
+                  </span>
+                  <span>Automation</span>
+                </button>
+                <button type="button" class="settings-tab-btn" role="tab" aria-selected="false" data-settings-tab="team">
+                  <span class="settings-tab-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <circle cx="8" cy="9" r="2.4" stroke="currentColor" stroke-width="1.6"/>
+                      <circle cx="16" cy="9" r="2.4" stroke="currentColor" stroke-width="1.6"/>
+                      <path d="M4.5 18a3.6 3.6 0 0 1 7 0M12.5 18a3.6 3.6 0 0 1 7 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                  <span>Team</span>
+                </button>
+                <button type="button" class="settings-tab-btn" role="tab" aria-selected="false" data-settings-tab="membership">
+                  <span class="settings-tab-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <rect x="3.5" y="5.2" width="17" height="13.6" rx="3.1" stroke="currentColor" stroke-width="1.6"/>
+                      <path d="M3.5 10.2h17M7.6 14.6h4.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    </svg>
+                  </span>
+                  <span>Plan &amp; Access</span>
+                </button>
+                <button type="button" class="settings-tab-btn" role="tab" aria-selected="false" data-settings-tab="developer">
+                  <span class="settings-tab-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none">
+                      <path d="m9 8-4 4 4 4M15 8l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                  <span>Developer</span>
+                </button>
+              </div>
+              <div
+                id="company-switcher-panel"
+                class="panel settings-panel settings-wide settings-tab-panel is-active"
+                data-settings-tab-panel="company"
+              >
+                <div class="company-switcher">
+                  <div class="switcher-row">
+                    <div class="switcher-actions">
+                      <button id="company-add-btn" class="ghost-btn" type="button">Add company</button>
+                    </div>
+                  </div>
+                  <div id="company-switcher" class="switcher-chips"></div>
+                </div>
+                <div class="settings-divider"></div>
+                <div class="tenant-editor">
+                  <div class="settings-form settings-grid tenant-form">
+                    <div>
+                      <label for="company-edit-name">Company name</label>
+                      <input id="company-edit-name" type="text" placeholder="Company name" />
+                    </div>
+                    <div>
+                      <label for="website-edit-domain">Website domain</label>
+                      <input id="website-edit-domain" type="text" placeholder="example.com" />
+                    </div>
+                    <input id="website-edit-key" type="text" readonly hidden />
+                    <button id="website-copy-btn" class="ghost-btn" type="button" hidden>Copy key</button>
+                    <div class="settings-actions full-width">
+                      <button id="company-save-btn" type="button">Save company</button>
+                      <button
+                        id="company-delete-btn"
+                        class="icon-btn danger"
+                        type="button"
+                        title="Delete company"
+                        aria-label="Delete company"
+                      >
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <path d="M9 5h6m-8 3h10m-9 0 1 11h6l1-11M10 5V4h4v1" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                        </svg>
+                      </button>
+                      <span id="company-save-status" class="save-status" aria-live="polite"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <div class="settings-stack settings-tab-panel" data-settings-tab-panel="personal">
+              <div class="settings-section-title">Personal settings</div>
+              <div class="settings-section-help">Update your profile, password, and avatar.</div>
+              <div id="profile-panel" class="panel settings-panel">
+                <h3>My profile</h3>
+                <p class="settings-help">Manage your personal details and access.</p>
+                <div class="profile-header">
+                  <div id="profile-avatar" class="profile-avatar">OC</div>
+                  <div class="profile-actions">
+                    <input id="profile-avatar-input" type="file" accept="image/*" hidden />
+                    <button id="profile-avatar-btn" class="user-upload" type="button">Upload avatar</button>
+                    <div id="profile-meta" class="profile-meta"></div>
+                  </div>
+                </div>
+                <form id="profile-form" class="settings-form settings-grid two-col-form">
+                  <div>
+                    <label for="profile-name">Name</label>
+                    <input id="profile-name" name="name" type="text" required />
+                  </div>
+                  <div>
+                    <label for="profile-email">Email</label>
+                    <input id="profile-email" name="email" type="email" required />
+                  </div>
+                  <div>
+                    <label for="profile-role">Role</label>
+                    <input id="profile-role" name="role" type="text" disabled />
+                  </div>
+                  <div>
+                    <label for="profile-current-password">Current password</label>
+                    <input
+                      id="profile-current-password"
+                      name="current_password"
+                      type="password"
+                      placeholder="Required to change password"
+                    />
+                  </div>
+                  <div>
+                    <label for="profile-new-password">New password</label>
+                    <input
+                      id="profile-new-password"
+                      name="password"
+                      type="password"
+                      placeholder="Leave blank to keep current"
+                    />
+                  </div>
+                  <div>
+                    <label for="profile-confirm-password">Confirm new password</label>
+                    <input id="profile-confirm-password" type="password" placeholder="Repeat new password" />
+                  </div>
+                  <button type="submit">Save profile</button>
+                </form>
+              </div>
+            </div>
+
+            <div class="settings-stack settings-stack-tabs">
+              <div class="panel settings-panel settings-tab-panel" id="company-intent-panel" data-settings-tab-panel="widget">
+                <div class="panel-header">
+                  <div>
+                    <h3>Company intent</h3>
+                    <p>Define the chatbot purpose and when to hand off to a human.</p>
+                  </div>
+                </div>
+                <div class="settings-form settings-grid">
+                  <div>
+                    <label for="company-purpose">Chatbot purpose</label>
+                    <select id="company-purpose" data-local-only="true">
+                      <option value="sales">Sales / lead generation</option>
+                      <option value="support">Customer support</option>
+                      <option value="booking">Booking / scheduling</option>
+                      <option value="mixed">Mixed</option>
+                    </select>
+                    <p class="settings-help">Saved locally for this company.</p>
+                  </div>
+                  <div class="full-width">
+                    <label>Human handover trigger</label>
+                    <div class="settings-checklist">
+                      <label class="inline-check">
+                        <input id="handover-lead" type="checkbox" data-local-only="true" />
+                        When lead is captured
+                      </label>
+                      <label class="inline-check">
+                        <input id="handover-price" type="checkbox" data-local-only="true" />
+                        When user asks for price
+                      </label>
+                      <label class="inline-check">
+                        <input id="handover-human" type="checkbox" data-local-only="true" />
+                        When user asks for a human
+                      </label>
+                      <label class="inline-check">
+                        <input id="handover-never" type="checkbox" data-local-only="true" />
+                        Never (AI only)
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel settings-panel settings-tab-panel" id="widget-panel" data-settings-tab-panel="widget">
+                <div class="panel-header">
+                  <div>
+                    <h3>Widget settings</h3>
+                    <p>Customize greetings, color, and lead capture</p>
+                  </div>
+                </div>
+                <div class="widget-settings-layout">
+                <form id="settings-form" class="settings-form settings-grid widget-settings-form two-col-form">
+                  <div class="settings-group-title full-width">Appearance</div>
+                  <div>
+                    <label for="setting-company">Company name</label>
+                    <input id="setting-company" name="company_name" type="text" />
+                  </div>
+                  <div>
+                    <label for="setting-color">Widget color</label>
+                    <input id="setting-color" name="widget_color" type="color" class="color-picker" value="#1f6b75" />
+                  </div>
+                  <div class="full-width">
+                    <label>Widget icon style</label>
+                    <input id="setting-icon-style" name="widget_icon_style" type="hidden" value="classic" />
+                    <div id="widget-icon-templates" class="widget-icon-templates widget-style-templates" role="radiogroup" aria-label="Widget icon style">
+                      <button type="button" class="widget-icon-template is-active" data-style="classic" role="radio" aria-checked="true">
+                        <span class="icon-dot style-classic"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7.8A3.8 3.8 0 018.8 4h6.4A3.8 3.8 0 0119 7.8v4.6a3.8 3.8 0 01-3.8 3.8h-4.1L7 19v-2.8A3.8 3.8 0 015 12.4V7.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path></svg></span>
+                        <span>Pulse</span>
+                      </button>
+                      <button type="button" class="widget-icon-template" data-style="glass" role="radio" aria-checked="false">
+                        <span class="icon-dot style-glass"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7.8A3.8 3.8 0 018.8 4h6.4A3.8 3.8 0 0119 7.8v4.6a3.8 3.8 0 01-3.8 3.8h-4.1L7 19v-2.8A3.8 3.8 0 015 12.4V7.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path></svg></span>
+                        <span>Glass</span>
+                      </button>
+                      <button type="button" class="widget-icon-template" data-style="solid" role="radio" aria-checked="false">
+                        <span class="icon-dot style-solid"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7.8A3.8 3.8 0 018.8 4h6.4A3.8 3.8 0 0119 7.8v4.6a3.8 3.8 0 01-3.8 3.8h-4.1L7 19v-2.8A3.8 3.8 0 015 12.4V7.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path></svg></span>
+                        <span>Gradient</span>
+                      </button>
+                      <button type="button" class="widget-icon-template" data-style="minimal" role="radio" aria-checked="false">
+                        <span class="icon-dot style-minimal"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7.8A3.8 3.8 0 018.8 4h6.4A3.8 3.8 0 0119 7.8v4.6a3.8 3.8 0 01-3.8 3.8h-4.1L7 19v-2.8A3.8 3.8 0 015 12.4V7.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path></svg></span>
+                        <span>Mono</span>
+                      </button>
+                      <button type="button" class="widget-icon-template" data-style="square" role="radio" aria-checked="false">
+                        <span class="icon-dot style-square"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7.8A3.8 3.8 0 018.8 4h6.4A3.8 3.8 0 0119 7.8v4.6a3.8 3.8 0 01-3.8 3.8h-4.1L7 19v-2.8A3.8 3.8 0 015 12.4V7.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path></svg></span>
+                        <span>Tile</span>
+                      </button>
+                      <button type="button" class="widget-icon-template" data-style="halo" role="radio" aria-checked="false">
+                        <span class="icon-dot style-halo"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7.8A3.8 3.8 0 018.8 4h6.4A3.8 3.8 0 0119 7.8v4.6a3.8 3.8 0 01-3.8 3.8h-4.1L7 19v-2.8A3.8 3.8 0 015 12.4V7.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path></svg></span>
+                        <span>Aura</span>
+                      </button>
+                      <button type="button" class="widget-icon-template" data-style="midnight" role="radio" aria-checked="false">
+                        <span class="icon-dot style-midnight"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7.8A3.8 3.8 0 018.8 4h6.4A3.8 3.8 0 0119 7.8v4.6a3.8 3.8 0 01-3.8 3.8h-4.1L7 19v-2.8A3.8 3.8 0 015 12.4V7.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path></svg></span>
+                        <span>Noir</span>
+                      </button>
+                      <button type="button" class="widget-icon-template" data-style="duotone" role="radio" aria-checked="false">
+                        <span class="icon-dot style-duotone"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7.8A3.8 3.8 0 018.8 4h6.4A3.8 3.8 0 0119 7.8v4.6a3.8 3.8 0 01-3.8 3.8h-4.1L7 19v-2.8A3.8 3.8 0 015 12.4V7.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path></svg></span>
+                        <span>Duo</span>
+                      </button>
+                      <button type="button" class="widget-icon-template" data-style="aurora" role="radio" aria-checked="false">
+                        <span class="icon-dot style-aurora"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7.8A3.8 3.8 0 018.8 4h6.4A3.8 3.8 0 0119 7.8v4.6a3.8 3.8 0 01-3.8 3.8h-4.1L7 19v-2.8A3.8 3.8 0 015 12.4V7.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path></svg></span>
+                        <span>Prism</span>
+                      </button>
+                      <button type="button" class="widget-icon-template" data-style="neon" role="radio" aria-checked="false">
+                        <span class="icon-dot style-neon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7.8A3.8 3.8 0 018.8 4h6.4A3.8 3.8 0 0119 7.8v4.6a3.8 3.8 0 01-3.8 3.8h-4.1L7 19v-2.8A3.8 3.8 0 015 12.4V7.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path></svg></span>
+                        <span>Glow</span>
+                      </button>
+                      <button type="button" class="widget-icon-template" data-style="sunset" role="radio" aria-checked="false">
+                        <span class="icon-dot style-sunset"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7.8A3.8 3.8 0 018.8 4h6.4A3.8 3.8 0 0119 7.8v4.6a3.8 3.8 0 01-3.8 3.8h-4.1L7 19v-2.8A3.8 3.8 0 015 12.4V7.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path></svg></span>
+                        <span>Amber</span>
+                      </button>
+                      <button type="button" class="widget-icon-template" data-style="outline" role="radio" aria-checked="false">
+                        <span class="icon-dot style-outline"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7.8A3.8 3.8 0 018.8 4h6.4A3.8 3.8 0 0119 7.8v4.6a3.8 3.8 0 01-3.8 3.8h-4.1L7 19v-2.8A3.8 3.8 0 015 12.4V7.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path></svg></span>
+                        <span>Ring</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="full-width">
+                    <label>Launcher shape</label>
+                    <input id="setting-icon-shape" name="widget_icon_shape" type="hidden" value="circle" />
+                    <div id="widget-shape-templates" class="widget-icon-templates widget-shape-templates" role="radiogroup" aria-label="Widget launcher shape">
+                      <button type="button" class="widget-icon-template is-active" data-shape="circle" role="radio" aria-checked="true">
+                        <span class="icon-dot shape-circle"></span>
+                        <span>Circle</span>
+                      </button>
+                      <button type="button" class="widget-icon-template" data-shape="rounded" role="radio" aria-checked="false">
+                        <span class="icon-dot shape-rounded"></span>
+                        <span>Rounded</span>
+                      </button>
+                      <button type="button" class="widget-icon-template" data-shape="square" role="radio" aria-checked="false">
+                        <span class="icon-dot shape-square"></span>
+                        <span>Square</span>
+                      </button>
+                      <button type="button" class="widget-icon-template" data-shape="pill" role="radio" aria-checked="false">
+                        <span class="icon-dot shape-pill"></span>
+                        <span>Pill</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="full-width">
+                    <label>Launcher icon</label>
+                    <input id="setting-icon-glyph" name="widget_icon_glyph" type="hidden" value="chat" />
+                    <div id="widget-glyph-templates" class="widget-icon-templates widget-glyph-templates" role="radiogroup" aria-label="Widget launcher icon">
+                      <button type="button" class="widget-icon-template is-active" data-glyph="chat" role="radio" aria-checked="true">
+                        <span class="icon-dot glyph-chat">
+                          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7.8A3.8 3.8 0 018.8 4h6.4A3.8 3.8 0 0119 7.8v4.6a3.8 3.8 0 01-3.8 3.8h-4.1L7 19v-2.8A3.8 3.8 0 015 12.4V7.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path></svg>
+                        </span>
+                        <span>Chat</span>
+                      </button>
+                      <button type="button" class="widget-icon-template" data-glyph="message" role="radio" aria-checked="false">
+                        <span class="icon-dot glyph-message">
+                          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4.5 6.5h15v9.8h-8.1L7 19v-2.7H4.5V6.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path></svg>
+                        </span>
+                        <span>Message</span>
+                      </button>
+                      <button type="button" class="widget-icon-template" data-glyph="support" role="radio" aria-checked="false">
+                        <span class="icon-dot glyph-support">
+                          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7.8 11.8a4.2 4.2 0 018.4 0v2.3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path><rect x="4.3" y="13.4" width="3.9" height="5.5" rx="1.5" stroke="currentColor" stroke-width="1.5"></rect><rect x="15.8" y="13.4" width="3.9" height="5.5" rx="1.5" stroke="currentColor" stroke-width="1.5"></rect></svg>
+                        </span>
+                        <span>Support</span>
+                      </button>
+                      <button type="button" class="widget-icon-template" data-glyph="quote" role="radio" aria-checked="false">
+                        <span class="icon-dot glyph-quote">
+                          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8 12h.01M12 12h.01M16 12h.01" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"></path></svg>
+                        </span>
+                        <span>Dots</span>
+                      </button>
+                      <button type="button" class="widget-icon-template" data-glyph="question" role="radio" aria-checked="false">
+                        <span class="icon-dot glyph-question">
+                          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9.7 9.1a2.3 2.3 0 114.6 0c0 1.6-2.3 1.8-2.3 3.3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path><circle cx="12" cy="16.9" r="1" fill="currentColor"></circle></svg>
+                        </span>
+                        <span>Help</span>
+                      </button>
+                      <button type="button" class="widget-icon-template" data-glyph="sales" role="radio" aria-checked="false">
+                        <span class="icon-dot glyph-sales">
+                          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4.5" y="8" width="15" height="10.5" rx="2.2" stroke="currentColor" stroke-width="1.6"></rect><path d="M9 8V6.8A1.8 1.8 0 0110.8 5h2.4A1.8 1.8 0 0115 6.8V8M4.5 12h15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg>
+                        </span>
+                        <span>Sales</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="full-width settings-help automation-primary-note">
+                    Automated popup rules are now the primary customer-facing messages.
+                  </div>
+                  <div class="settings-legacy-greetings" hidden>
+                    <div class="settings-group-title full-width">Messages</div>
+                    <div class="message-field">
+                      <label for="setting-greeting-online">Greeting (online)</label>
+                      <textarea id="setting-greeting-online" name="greeting_online_message" rows="2"></textarea>
+                    </div>
+                    <div class="message-field">
+                      <label for="setting-greeting-offline">Greeting (offline)</label>
+                      <textarea id="setting-greeting-offline" name="greeting_offline_message" rows="2"></textarea>
+                    </div>
+                    <div class="message-field full-width">
+                      <label for="setting-offline">Offline follow-up message</label>
+                      <textarea id="setting-offline" name="offline_message" rows="2"></textarea>
+                    </div>
+                  </div>
+                  <div class="full-width">
+                    <label for="setting-lead">Lead capture rule</label>
+                    <select id="setting-lead" name="lead_capture_mode">
+                      <option value="before">Before first message</option>
+                      <option value="after">After first message</option>
+                    </select>
+                  </div>
+                  <section class="widget-voice-card full-width">
+                    <div class="widget-voice-head">
+                      <div class="widget-voice-copy">
+                        <h4>Voice mode</h4>
+                        <p>Let visitors speak naturally and hear spoken replies without adding friction to chat.</p>
+                      </div>
+                      <label class="inline-check widget-voice-toggle" for="setting-voice-enabled">
+                        <input
+                          id="setting-voice-enabled"
+                          name="voice_mode_enabled"
+                          type="checkbox"
+                        />
+                        <span>Enable voice mode</span>
+                      </label>
+                    </div>
+
+                    <div class="widget-voice-layout">
+                      <section class="widget-voice-group">
+                        <div class="widget-voice-group-head">
+                          <span class="widget-voice-group-kicker">Input</span>
+                          <strong>Capture voice correctly</strong>
+                        </div>
+                        <div class="widget-voice-controls widget-voice-controls-input">
+                          <div class="widget-voice-select-wrap">
+                            <label for="setting-voice-language-mode">Input language</label>
+                            <select id="setting-voice-language-mode" name="voice_input_language_mode">
+                              <option value="auto">Preferred first + auto fallback</option>
+                              <option value="preferred">Preferred only</option>
+                            </select>
+                          </div>
+                          <div class="widget-voice-select-wrap">
+                            <label for="setting-voice-language">Preferred language</label>
+                            <select id="setting-voice-language" name="voice_input_language">
+                              <option value="en">English</option>
+                              <option value="de">German</option>
+                              <option value="es">Spanish</option>
+                              <option value="fr">French</option>
+                              <option value="it">Italian</option>
+                              <option value="lv">Latvian</option>
+                              <option value="lt">Lithuanian</option>
+                              <option value="nl">Dutch</option>
+                              <option value="pl">Polish</option>
+                              <option value="pt">Portuguese</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="widget-voice-glossary">
+                          <label for="setting-voice-glossary">Glossary</label>
+                          <input
+                            id="setting-voice-glossary"
+                            name="voice_input_glossary"
+                            type="text"
+                            maxlength="800"
+                            placeholder="FDS Cards, Chrome Hearts, metal business card"
+                          />
+                        </div>
+                      </section>
+
+                      <section class="widget-voice-group">
+                        <div class="widget-voice-group-head">
+                          <span class="widget-voice-group-kicker">Reply</span>
+                          <strong>Control how voice feels</strong>
+                        </div>
+                        <div class="widget-voice-controls widget-voice-controls-reply">
+                          <div class="widget-voice-select-wrap">
+                            <label for="setting-voice-send-mode">Voice send</label>
+                            <select id="setting-voice-send-mode" name="voice_send_mode">
+                              <option value="auto_send">Auto-send after transcription</option>
+                              <option value="review_first">Review before send</option>
+                            </select>
+                          </div>
+                          <div class="widget-voice-select-wrap">
+                            <label for="setting-voice">Reply voice</label>
+                            <div class="widget-voice-inline">
+                              <select id="setting-voice" name="voice_reply_voice">
+                                <option value="alloy">Alloy</option>
+                                <option value="ash">Ash</option>
+                                <option value="ballad">Ballad</option>
+                                <option value="coral">Coral</option>
+                                <option value="echo">Echo</option>
+                                <option value="fable">Fable</option>
+                                <option value="nova">Nova</option>
+                                <option value="onyx">Onyx</option>
+                                <option value="sage">Sage</option>
+                                <option value="shimmer">Shimmer</option>
+                                <option value="verse">Verse</option>
+                              </select>
+                              <button id="setting-voice-sample" type="button" class="ghost-btn">Play sample</button>
+                            </div>
+                          </div>
+                          <div class="widget-voice-select-wrap">
+                            <label for="setting-voice-speed">Reply speed</label>
+                            <select id="setting-voice-speed" name="voice_reply_speed">
+                              <option value="0.85">Calm</option>
+                              <option value="1" selected>Normal</option>
+                              <option value="1.15">Fast</option>
+                              <option value="1.3">Quick</option>
+                            </select>
+                          </div>
+                        </div>
+                      </section>
+                    </div>
+
+                    <div class="widget-voice-footer">
+                      <p id="setting-voice-note" class="settings-help widget-voice-note">
+                        For best input quality: set the preferred language, add brand terms to the glossary, and keep the website page <code>&lt;html lang&gt;</code> correct. Visitors can still type normally.
+                      </p>
+                    </div>
+                  </section>
+                  <div class="full-width settings-checklist">
+                    <label class="inline-check" for="setting-offline-ai-contact-prompt">
+                      <input
+                        id="setting-offline-ai-contact-prompt"
+                        name="offline_ai_contact_prompt"
+                        type="checkbox"
+                      />
+                      <span>Ask contact form in offline + AI chats</span>
+                    </label>
+                    <p class="settings-help">
+                      Default is off. AI can still capture contact details from customer messages.
+                    </p>
+                  </div>
+                  <div class="settings-actions full-width">
+                    <button type="submit">Save settings</button>
+                    <span id="settings-save-status" class="save-status" aria-live="polite"></span>
+                  </div>
+                </form>
+                <div class="widget-preview" id="widget-preview">
+                  <div class="widget-preview-stage">
+                    <div class="widget-preview-chat" id="preview-chat" aria-hidden="true">
+                      <div class="widget-preview-header">
+                        <div class="widget-preview-avatar">OC</div>
+                        <div>
+                          <strong id="preview-company">OnlineChat</strong>
+                          <span id="preview-status">Online</span>
+                        </div>
+                        <button id="preview-close" type="button" class="widget-preview-close" aria-label="Close preview">×</button>
+                      </div>
+                      <div class="widget-preview-body" id="preview-messages">
+                        <div class="widget-preview-bubble is-agent" id="preview-greeting">Hi! How can we help today?</div>
+                      </div>
+                      <div id="preview-voice-draft" class="widget-preview-draft" hidden>Voice draft - review, edit, then send.</div>
+                      <form id="preview-form" class="widget-preview-input" autocomplete="off">
+                        <button id="preview-voice" type="button" class="widget-preview-voice" aria-label="Voice mode preview">
+                          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M12 5a2.8 2.8 0 0 1 2.8 2.8v4.4A2.8 2.8 0 0 1 12 15a2.8 2.8 0 0 1-2.8-2.8V7.8A2.8 2.8 0 0 1 12 5Z" stroke="currentColor" stroke-width="1.7"/>
+                            <path d="M6.8 11.8a5.2 5.2 0 0 0 10.4 0M12 17v2.3M9.2 19.3h5.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                          </svg>
+                        </button>
+                        <input id="preview-input" type="text" maxlength="300" placeholder="Type a test message..." />
+                        <button id="preview-voice-replay" type="button" class="widget-preview-voice widget-preview-replay" aria-label="Spoken reply preview" hidden>
+                          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M5 15.2V8.8a1 1 0 0 1 1.6-.8l5 3.7a1 1 0 0 1 0 1.6l-5 3.7a1 1 0 0 1-1.6-.8Z" fill="currentColor"></path>
+                            <path d="M14.8 8.5a5.3 5.3 0 0 1 0 7M17.6 6.2a8.4 8.4 0 0 1 0 11.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path>
+                          </svg>
+                        </button>
+                        <button id="preview-send" type="submit">Send</button>
+                      </form>
+                    </div>
+                    <div class="widget-preview-launcher-wrap">
+                      <button id="preview-launcher" type="button" class="widget-preview-launcher style-classic shape-circle" aria-label="Widget launcher preview" aria-expanded="false">
+                        <span id="preview-launcher-glyph" class="preview-launcher-glyph">
+                          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 7.8A3.8 3.8 0 018.8 4h6.4A3.8 3.8 0 0119 7.8v4.6a3.8 3.8 0 01-3.8 3.8h-4.1L7 19v-2.8A3.8 3.8 0 015 12.4V7.8z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"></path></svg>
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="widget-preview-tools">
+                    <button id="preview-reset" type="button" class="ghost-btn">Reset demo</button>
+                    <span id="preview-voice-note" class="chat-meta">Interactive test preview (works before saving)</span>
+                  </div>
+                </div>
+                </div>
+              </div>
+
+              <div class="panel settings-panel settings-tab-panel" id="automation-panel" data-settings-tab-panel="automation">
+                <div class="panel-header">
+                  <div>
+                    <h3>Automation</h3>
+                  </div>
+                </div>
+                <section class="settings-disclosure automation-section is-static">
+                  <h4 class="settings-disclosure-title with-icon">
+                    <span class="section-icon" aria-hidden="true">⚡</span>
+                    Popup rules
+                  </h4>
+                  <form id="popup-form" class="settings-form settings-grid popup-form-grid">
+                    <div>
+                      <label for="popup-preset">Preset</label>
+                      <select id="popup-preset" data-local-only="true">
+                        <option value="custom">Manual / custom</option>
+                        <option value="pricing">Pricing page helper</option>
+                        <option value="welcome">Welcome message</option>
+                        <option value="exit">Exit intent</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label for="popup-name">Rule name</label>
+                      <input id="popup-name" name="name" type="text" placeholder="Pricing page prompt" required />
+                    </div>
+                    <div class="full-width">
+                      <label for="popup-message">Popup message</label>
+                      <textarea id="popup-message" name="message" rows="2" required></textarea>
+                    </div>
+                    <div class="full-width popup-actions-builder">
+                      <label for="popup-action-input">Quick replies (optional)</label>
+                      <div class="popup-action-input-row">
+                        <input
+                          id="popup-action-input"
+                          type="text"
+                          data-local-only="true"
+                          maxlength="80"
+                          placeholder="e.g. Show prices"
+                        />
+                        <button id="popup-action-add" type="button" class="ghost-btn">+ Add</button>
+                      </div>
+                      <input id="popup-actions-json" name="popup_actions_json" type="hidden" value="" />
+                      <div id="popup-action-list" class="popup-action-list" aria-live="polite"></div>
+                      <p class="automation-compact-hint">Up to 6 buttons. Press Enter to add quickly.</p>
+                    </div>
+                    <div id="popup-advanced" class="settings-disclosure settings-advanced full-width is-static">
+                      <h5 class="settings-disclosure-title with-icon">
+                        <span class="section-icon" aria-hidden="true">🎯</span>
+                        Targeting
+                      </h5>
+                      <div class="settings-form settings-grid popup-form-grid">
+                        <div>
+                          <label for="popup-match">URL match type</label>
+                          <select id="popup-match" name="match_type">
+                            <option value="contains">Contains</option>
+                            <option value="exact">Exact</option>
+                            <option value="regex">Regex</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label for="popup-value">URL match value</label>
+                          <input id="popup-value" name="match_value" type="text" placeholder="/pricing" value="/" required />
+                        </div>
+                        <div>
+                          <label for="popup-status">Availability</label>
+                          <select id="popup-status" name="audience_status">
+                            <option value="any">Any</option>
+                            <option value="online">Online only</option>
+                            <option value="offline">Offline only</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label for="popup-visitor">Visitor type</label>
+                          <select id="popup-visitor" name="audience_returning">
+                            <option value="any">Any</option>
+                            <option value="first">First visit</option>
+                            <option value="returning">Returning</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label for="popup-delay">Delay (seconds)</label>
+                          <input id="popup-delay" name="delay_seconds" type="number" min="0" max="60" value="6" />
+                        </div>
+                        <div>
+                          <label for="popup-language-target">Language target</label>
+                          <select id="popup-language-target" data-local-only="true">
+                            <option value="all">All languages</option>
+                            <option value="specific">Specific language</option>
+                          </select>
+                        </div>
+                        <div id="popup-language-select-wrap">
+                          <label for="popup-language-code">Language</label>
+                          <select id="popup-language-code" data-local-only="true">
+                            <option value="/en">English (/en)</option>
+                            <option value="/fr">French (/fr)</option>
+                            <option value="/es">Spanish (/es)</option>
+                            <option value="/de">German (/de)</option>
+                            <option value="/it">Italian (/it)</option>
+                            <option value="/lv">Latvian (/lv)</option>
+                            <option value="/ru">Russian (/ru)</option>
+                            <option value="custom">Custom prefix</option>
+                          </select>
+                        </div>
+                        <div id="popup-language-custom-wrap" class="full-width" hidden>
+                          <label for="popup-language-custom">Custom language prefix</label>
+                          <input id="popup-language-custom" type="text" data-local-only="true" placeholder="/en-us" />
+                        </div>
+                        <div class="full-width">
+                          <input id="popup-locale" name="locale_path" type="hidden" />
+                          <p class="automation-compact-hint">Language by URL prefix (example: <code>/en</code>, <code>/fr</code>).</p>
+                        </div>
+                      </div>
+                    </div>
+                    <button type="submit">Save popup rule</button>
+                  </form>
+                  <div id="popup-list" class="popup-list"></div>
+                </section>
+
+                <section class="settings-disclosure automation-section is-static">
+                  <h4 class="settings-disclosure-title with-icon">
+                    <span class="section-icon" aria-hidden="true">💬</span>
+                    Canned replies
+                  </h4>
+                  <form id="canned-form" class="settings-form settings-grid">
+                    <div>
+                      <label for="canned-title">Title</label>
+                      <input id="canned-title" name="title" type="text" placeholder="Welcome message" required />
+                    </div>
+                    <div>
+                      <label for="canned-shortcut">Shortcut (optional)</label>
+                      <input id="canned-shortcut" name="shortcut" type="text" placeholder="/welcome" />
+                    </div>
+                    <div class="full-width">
+                      <label for="canned-content">Reply text</label>
+                      <textarea id="canned-content" name="content" rows="2" required></textarea>
+                    </div>
+                    <button type="submit">Save canned reply</button>
+                  </form>
+                  <div id="canned-list" class="popup-list"></div>
+                </section>
+              </div>
+
+              <div id="team-panel" class="panel settings-panel settings-tab-panel" data-settings-tab-panel="team">
+                <div class="panel-header">
+                  <div>
+                    <h3>Team</h3>
+                    <p>Manage agents and access</p>
+                  </div>
+                </div>
+                <form id="user-form" class="settings-form settings-grid">
+                  <div>
+                    <label for="user-name">Name</label>
+                    <input id="user-name" name="name" type="text" placeholder="Agent name" required />
+                  </div>
+                  <div>
+                    <label for="user-email">Email</label>
+                    <input id="user-email" name="email" type="email" placeholder="agent@example.com" required />
+                  </div>
+                  <div>
+                    <label for="user-role">Role</label>
+                    <select id="user-role" name="role">
+                      <option value="agent">Agent</option>
+                      <option value="admin">Admin</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="user-password">Temporary password</label>
+                    <input id="user-password" name="password" type="text" placeholder="Set a temporary password" required />
+                  </div>
+                  <div id="user-website-access-wrap" class="full-width team-website-access">
+                    <div class="team-website-access-head">
+                      <label for="user-website-access-mode">Website access</label>
+                      <select id="user-website-access-mode" name="website_access_mode">
+                        <option value="all">All company websites</option>
+                        <option value="selected">Selected websites</option>
+                      </select>
+                    </div>
+                    <div id="user-website-access-list" class="website-access-list" aria-live="polite"></div>
+                    <p id="user-website-access-help" class="settings-help">
+                      Choose where this agent can work. Admin users always have full access.
+                    </p>
+                  </div>
+                  <button type="submit">Add agent</button>
+                </form>
+                <div id="user-list" class="user-list"></div>
+              </div>
+
+              <div id="membership-panel" class="panel settings-panel settings-tab-panel" data-settings-tab-panel="membership">
+                <div class="panel-header panel-header-compact">
+                  <div>
+                    <h3>Plan &amp; Access</h3>
+                    <p>Access, plan, and billing for the selected workspace.</p>
+                  </div>
+                  <button id="membership-refresh-btn" class="ghost-btn" type="button">Refresh</button>
+                </div>
+                <div class="membership-shell">
+                  <section class="membership-hero">
+                    <div class="membership-hero-copy">
+                      <span class="membership-eyebrow">Workspace overview</span>
+                      <h4>See status fast. Act in one click.</h4>
+                      <strong id="membership-workspace-name" class="membership-hero-name">-</strong>
+                      <div class="membership-hero-meta">
+                        <span id="membership-role-badge" class="badge neutral">Member</span>
+                        <span id="membership-connection-badge-hero" class="badge neutral">Unknown</span>
+                        <span id="membership-entitlement-badge-hero" class="badge neutral">Unknown</span>
+                      </div>
+                      <div id="membership-status-message" class="membership-status-banner"></div>
+                    </div>
+                    <div class="membership-actions-card">
+                      <div class="membership-actions-head">
+                        <span class="membership-label">Billing</span>
+                        <p>See renewal timing and open billing.</p>
+                      </div>
+                      <div class="membership-countdown-card">
+                        <span id="membership-cycle-label" class="membership-label">Timeline</span>
+                        <strong id="membership-cycle-value">Waiting for workspace</strong>
+                        <p id="membership-cycle-meta" class="membership-card-copy">
+                          Select a workspace to load billing dates.
+                        </p>
+                      </div>
+                      <div class="membership-actions">
+                        <button id="membership-primary-action-btn" type="button">Take action</button>
+                        <button id="membership-install-btn" type="button" class="ghost-btn">Install widget</button>
+                        <button id="membership-workspace-portal-btn" type="button" class="ghost-btn">Open workspace hub</button>
+                      </div>
+                      <div class="membership-actions membership-actions-billing">
+                        <button id="membership-billing-btn" type="button" class="ghost-btn">Manage billing</button>
+                      </div>
+                    </div>
+                  </section>
+
+                  <div class="membership-grid membership-grid-hidden" hidden>
+                    <article class="membership-card membership-card-hero">
+                      <div class="membership-card-head">
+                        <span class="membership-card-icon" aria-hidden="true">
+                          <svg viewBox="0 0 24 24" fill="none"><path d="M4 7.5A2.5 2.5 0 016.5 5h11A2.5 2.5 0 0120 7.5v9A2.5 2.5 0 0117.5 19h-11A2.5 2.5 0 014 16.5v-9z" stroke="currentColor" stroke-width="1.6"></path><path d="M8 10.5h8M8 14h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg>
+                        </span>
+                        <span class="membership-label">Workspace</span>
+                      </div>
+                      <strong id="membership-workspace-name">-</strong>
+                      <div class="membership-meta">
+                        <span id="membership-workspace-id" class="badge neutral">-</span>
+                        <span id="membership-connection-badge" class="badge neutral">Unknown</span>
+                      </div>
+                    </article>
+                    <article class="membership-card">
+                      <div class="membership-card-head">
+                        <span class="membership-card-icon" aria-hidden="true">
+                          <svg viewBox="0 0 24 24" fill="none"><path d="M6 8.5A2.5 2.5 0 018.5 6h7A2.5 2.5 0 0118 8.5v7a2.5 2.5 0 01-2.5 2.5h-7A2.5 2.5 0 016 15.5v-7z" stroke="currentColor" stroke-width="1.6"></path><path d="M9 12h6M12 9v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg>
+                        </span>
+                        <span class="membership-label">Product</span>
+                      </div>
+                      <strong id="membership-product-name">chat_widget</strong>
+                      <div class="membership-meta">
+                        <span id="membership-product-badge" class="badge neutral">Unknown</span>
+                      </div>
+                    </article>
+                    <article class="membership-card">
+                      <div class="membership-card-head">
+                        <span class="membership-card-icon" aria-hidden="true">
+                          <svg viewBox="0 0 24 24" fill="none"><path d="M12 4l6.5 3.5v4.8c0 4-2.7 6.9-6.5 7.7-3.8-.8-6.5-3.7-6.5-7.7V7.5L12 4z" stroke="currentColor" stroke-width="1.6"></path><path d="M9.3 12.2l1.8 1.8 3.6-3.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                        </span>
+                        <span class="membership-label">Readiness</span>
+                      </div>
+                      <strong id="membership-ready-title">Unknown</strong>
+                      <p id="membership-ready-reason" class="membership-card-copy"></p>
+                      <div class="membership-meta">
+                        <span id="membership-ready-badge" class="badge neutral">Unknown</span>
+                      </div>
+                    </article>
+                    <article class="membership-card">
+                      <div class="membership-card-head">
+                        <span class="membership-card-icon" aria-hidden="true">
+                          <svg viewBox="0 0 24 24" fill="none"><path d="M6 7.5A2.5 2.5 0 018.5 5h7A2.5 2.5 0 0118 7.5v9a2.5 2.5 0 01-2.5 2.5h-7A2.5 2.5 0 016 16.5v-9z" stroke="currentColor" stroke-width="1.6"></path><path d="M9 9.5h6M9 13h6M9 16.5h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path></svg>
+                        </span>
+                        <span class="membership-label">Plan</span>
+                      </div>
+                      <strong id="membership-plan-label">-</strong>
+                      <div class="membership-meta">
+                        <span id="membership-entitlement-badge" class="badge neutral">Unknown</span>
+                      </div>
+                    </article>
+                  </div>
+
+                  <section class="membership-plan-showcase">
+                    <div class="membership-section-heading">
+                      <div>
+                        <span class="membership-label">Plans</span>
+                        <h4>Pick a plan</h4>
+                      </div>
+                      <p>Each card shows the next action.</p>
+                    </div>
+                    <div id="membership-plan-cards" class="membership-plan-cards"></div>
+                  </section>
+
+                  <section class="membership-checklist-card">
+                    <div class="membership-section-heading">
+                      <div>
+                        <span class="membership-label">Next steps</span>
+                        <h4>What needs attention</h4>
+                      </div>
+                      <p>Only the items that matter right now.</p>
+                    </div>
+                    <div id="membership-checklist" class="membership-checklist"></div>
+                  </section>
+
+                  <div class="membership-data-cache" hidden>
+                    <div id="membership-workspace-id" class="badge neutral">-</div>
+                    <div id="membership-product-name">Chat Widget</div>
+                    <div id="membership-product-badge" class="badge neutral">Unknown</div>
+                    <div id="membership-ready-title">Unknown</div>
+                    <div id="membership-ready-reason"></div>
+                    <div id="membership-ready-badge" class="badge neutral">Unknown</div>
+                    <div id="membership-plan-label">-</div>
+                    <div id="membership-entitlement-badge" class="badge neutral">Unknown</div>
+                    <div id="membership-products-list" class="membership-pill-list"></div>
+                    <div id="membership-flags-list" class="membership-pill-list"></div>
+                    <div id="membership-limits-list" class="membership-pill-list"></div>
+                    <select id="membership-plan-select" aria-hidden="true" tabindex="-1">
+                      <option value="">No plans available</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel settings-panel settings-tab-panel" id="embed-panel" data-settings-tab-panel="developer">
+                <div class="panel-header">
+                  <div>
+                    <h3>Developer settings</h3>
+                    <p>Embed code and advanced configuration</p>
+                  </div>
+                </div>
+                <details class="settings-disclosure settings-advanced">
+                  <summary>Advanced / Developer settings</summary>
+                  <p class="settings-help">This section is for developers. You usually don't need to change this.</p>
+                  <div class="settings-form settings-grid">
+                    <div>
+                      <label for="embed-api-base">API base URL</label>
+                      <input id="embed-api-base" type="text" />
+                    </div>
+                    <div>
+                      <label for="embed-widget-base">Widget base URL</label>
+                      <input id="embed-widget-base" type="text" />
+                    </div>
+                    <div>
+                      <label for="embed-website-key">Website key</label>
+                      <input id="embed-website-key" type="text" readonly />
+                    </div>
+                    <div>
+                      <label for="embed-position">Widget position</label>
+                      <select id="embed-position">
+                        <option value="right">Right</option>
+                        <option value="left">Left</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label for="embed-max-upload">Max upload (MB)</label>
+                      <input id="embed-max-upload" type="number" min="1" max="25" value="5" />
+                    </div>
+                    <div class="settings-inline">
+                      <label for="embed-inline-css">Inline CSS</label>
+                      <input id="embed-inline-css" type="checkbox" />
+                    </div>
+                  </div>
+                  <div class="embed-preview">
+                    <pre class="embed-code"><code id="embed-code"></code></pre>
+                    <button id="embed-copy" class="ghost-btn" type="button">Copy code</button>
+                  </div>
+                </details>
+              </div>
+            </div>
+          <div id="company-wizard-modal" class="settings-modal" hidden>
+            <div class="settings-modal-card">
+              <div class="wizard-header">
+                <div>
+                  <h4>Add company</h4>
+                  <p>Follow the steps to set up a new company and website.</p>
+                </div>
+                <button id="company-wizard-close" class="ghost-btn" type="button">Close</button>
+              </div>
+              <div id="tenant-wizard" class="settings-wizard">
+                <div class="wizard-panels">
+                  <div class="wizard-panel is-active" data-step="1">
+                    <form id="wizard-company-form" class="settings-form settings-grid">
+                      <div>
+                        <label for="wizard-company-name">Company name</label>
+                        <input id="wizard-company-name" type="text" placeholder="Company name" required />
+                      </div>
+                      <div>
+                        <label for="wizard-website-domain">Website domain</label>
+                        <input id="wizard-website-domain" type="text" placeholder="example.com" />
+                      </div>
+                      <div class="wizard-actions">
+                        <button type="submit">Create company</button>
+                      </div>
+                    </form>
+                    <div id="wizard-result" class="wizard-result" hidden>
+                      <div>
+                        <span class="badge success">Company created</span>
+                      </div>
+                      <div class="wizard-result-row">
+                        <span class="chat-meta">Website key</span>
+                        <code id="wizard-website-key"></code>
+                      </div>
+                      <div class="wizard-actions">
+                        <button id="wizard-jump-embed" class="ghost-btn" type="button">View embed code</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+        </section>
+
+

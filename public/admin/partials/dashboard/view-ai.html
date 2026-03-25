@@ -1,0 +1,555 @@
+﻿        <section class="view" data-view="ai">
+          <div class="ai-tabs settings-tabs" role="tablist" aria-label="AI tabs">
+            <button
+              class="ai-tab-btn settings-tab-btn is-active"
+              type="button"
+              data-tab="behavior"
+              role="tab"
+              aria-selected="true"
+            >
+              <span class="settings-tab-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 4.2 14 9l5 .6-3.6 3.3.9 4.9L12 15.2l-4.3 2.6.9-4.9L5 9.6 10 9l2-4.8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span>Behavior</span>
+            </button>
+            <button
+              class="ai-tab-btn settings-tab-btn"
+              type="button"
+              data-tab="knowledge"
+              role="tab"
+              aria-selected="false"
+            >
+              <span class="settings-tab-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M6 5.5h10a2.5 2.5 0 0 1 2.5 2.5v10.5H8.2A2.2 2.2 0 0 1 6 16.3V5.5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                  <path d="M8.5 7.8h7M8.5 11h7M8.5 14.2h4.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <span>Knowledge</span>
+            </button>
+            <button
+              class="ai-tab-btn settings-tab-btn"
+              type="button"
+              data-tab="training"
+              role="tab"
+              aria-selected="false"
+            >
+              <span class="settings-tab-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <rect x="4.2" y="4.2" width="15.6" height="15.6" rx="3.2" stroke="currentColor" stroke-width="1.6"/>
+                  <path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <span>Training</span>
+            </button>
+            <button
+              class="ai-tab-btn settings-tab-btn"
+              type="button"
+              data-tab="advanced"
+              role="tab"
+              aria-selected="false"
+            >
+              <span class="settings-tab-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="m9 8-4 4 4 4M15 8l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M11.2 6.2 9.8 17.8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <span>Advanced</span>
+            </button>
+          </div>
+          <div class="ai-tab-panels">
+            <div class="ai-tab-panel is-active" data-tab="behavior">
+              <div class="settings-layout">
+                <div class="settings-stack">
+                  <!-- AI settings: enable/disable, provider/model controls, prompt, test -->
+                  <div class="panel settings-panel" id="ai-settings-panel">
+                    <form id="ai-settings-form" class="settings-form settings-grid ai-settings-tabs">
+                      <div class="ai-tab-section is-active" data-ai-section="behavior">
+                        <div class="ai-behavior-bar">
+                          <div>
+                            <h4>Behavior</h4>
+                            <p>Configure how the assistant responds.</p>
+                          </div>
+                          <div class="ai-behavior-actions">
+                            <div class="ai-behavior-toggle">
+                              <span class="status-text">AI enabled</span>
+                              <label class="switch" for="ai-enabled-panel">
+                                <input id="ai-enabled-panel" type="checkbox" />
+                                <span class="switch-track" aria-hidden="true"></span>
+                              </label>
+                              <span id="ai-status-panel" class="status-pill">Off</span>
+                            </div>
+                            <span id="ai-behavior-status" class="status-pill">Draft</span>
+                            <button id="ai-save-btn" type="submit" class="primary-btn" disabled>Save changes</button>
+                          </div>
+                        </div>
+                        <div class="ai-behavior-grid">
+                          <section class="ai-card">
+                            <div class="ai-card-header">
+                              <h4>Assistant identity</h4>
+                              <p>What customers see in the chat.</p>
+                            </div>
+                            <div class="ai-identity-grid">
+                              <div>
+                                <label for="ai-name">Assistant name</label>
+                                <input id="ai-name" name="ai_name" type="text" placeholder="AI Assistant" />
+                              </div>
+                              <div class="settings-inline ai-avatar-row">
+                                <label>AI avatar</label>
+                                <div id="ai-avatar" class="ai-avatar" aria-label="AI avatar"></div>
+                                <button id="ai-avatar-btn" class="ghost-btn" type="button">Upload</button>
+                                <input id="ai-avatar-input" type="file" accept="image/*" hidden />
+                              </div>
+                            </div>
+                          </section>
+
+                          <section class="ai-card">
+                            <div class="ai-card-header">
+                              <h4>Quick setup</h4>
+                              <p>Pick a goal and tone. Everything else can stay on defaults.</p>
+                            </div>
+                            <div class="ai-segmented-row">
+                              <span class="ai-segmented-label">Goal</span>
+                              <div class="segmented" role="group" aria-label="Goal">
+                                <input type="radio" id="ai-goal-support" name="ai-goal" value="support" checked />
+                                <label for="ai-goal-support">Support</label>
+                                <input type="radio" id="ai-goal-sales" name="ai-goal" value="sales" />
+                                <label for="ai-goal-sales">Sales</label>
+                                <input type="radio" id="ai-goal-mixed" name="ai-goal" value="mixed" />
+                                <label for="ai-goal-mixed">Mixed</label>
+                              </div>
+                            </div>
+                            <div class="ai-segmented-row" id="ai-sales-style-row">
+                              <span class="ai-segmented-label">Sales style</span>
+                              <div class="segmented" role="group" aria-label="Sales style">
+                                <input type="radio" id="ai-sales-soft" name="ai-sales-style" value="soft" checked />
+                                <label for="ai-sales-soft">Soft</label>
+                                <input type="radio" id="ai-sales-balanced" name="ai-sales-style" value="balanced" />
+                                <label for="ai-sales-balanced">Balanced</label>
+                                <input type="radio" id="ai-sales-direct" name="ai-sales-style" value="direct" />
+                                <label for="ai-sales-direct">Direct</label>
+                              </div>
+                            </div>
+                            <div class="ai-segmented-row">
+                              <span class="ai-segmented-label">Tone</span>
+                              <div class="segmented" role="group" aria-label="Tone">
+                                <input type="radio" id="ai-tone-friendly" name="ai-tone" value="friendly" />
+                                <label for="ai-tone-friendly">Friendly</label>
+                                <input type="radio" id="ai-tone-professional" name="ai-tone" value="professional" checked />
+                                <label for="ai-tone-professional">Professional</label>
+                                <input type="radio" id="ai-tone-premium" name="ai-tone" value="premium" />
+                                <label for="ai-tone-premium">Premium</label>
+                              </div>
+                            </div>
+                            <div class="ai-segmented-row">
+                              <span class="ai-segmented-label">Reply length</span>
+                              <div class="segmented" role="group" aria-label="Reply length">
+                                <input type="radio" id="ai-length-short" name="ai-length" value="short" checked />
+                                <label for="ai-length-short">Short</label>
+                                <input type="radio" id="ai-length-balanced" name="ai-length" value="balanced" />
+                                <label for="ai-length-balanced">Balanced</label>
+                                <input type="radio" id="ai-length-detailed" name="ai-length" value="detailed" />
+                                <label for="ai-length-detailed">Detailed</label>
+                              </div>
+                            </div>
+                            <div class="ai-segmented-row">
+                              <span class="ai-segmented-label">Language</span>
+                              <div class="segmented" role="group" aria-label="Language mode">
+                                <input type="radio" id="ai-language-auto" name="ai-language-mode" value="auto" checked />
+                                <label for="ai-language-auto">Auto-detect</label>
+                                <input type="radio" id="ai-language-fixed" name="ai-language-mode" value="fixed" />
+                                <label for="ai-language-fixed">Fixed</label>
+                              </div>
+                              <select id="ai-language-select" class="ai-language-select" hidden>
+                                <option value="English" selected>English</option>
+                                <option value="German">German</option>
+                                <option value="French">French</option>
+                                <option value="Spanish">Spanish</option>
+                                <option value="Italian">Italian</option>
+                                <option value="Portuguese">Portuguese</option>
+                                <option value="Dutch">Dutch</option>
+                                <option value="Polish">Polish</option>
+                              </select>
+                            </div>
+                          </section>
+
+                          <section class="ai-card">
+                            <div class="ai-card-header">
+                              <h4>Core rules</h4>
+                              <p>Universal rules that keep replies clear and safe.</p>
+                            </div>
+                            <div class="ai-toggle-list">
+                              <label class="ai-toggle">
+                                <input id="ai-rule-one-question" type="checkbox" checked />
+                                <span>Ask one question at a time</span>
+                                <small>Keep replies short and focused.</small>
+                              </label>
+                              <label class="ai-toggle">
+                                <input id="ai-rule-ask-unclear" type="checkbox" checked />
+                                <span>If unsure, ask instead of guessing</span>
+                                <small>Never invent facts or timelines.</small>
+                              </label>
+                              <label class="ai-toggle">
+                                <input id="ai-rule-no-markdown" type="checkbox" checked />
+                                <span>No markdown formatting</span>
+                                <small>Use plain text so messages render cleanly.</small>
+                              </label>
+                              <label class="ai-toggle">
+                                <input id="ai-rule-capture-contact" type="checkbox" />
+                                <span>Capture contact details when appropriate</span>
+                                <small>Ask for email or WhatsApp when it makes sense.</small>
+                              </label>
+                              <label class="ai-toggle" id="ai-sales-prefer-contact-row">
+                                <input id="ai-sales-prefer-contact" type="checkbox" checked />
+                                <span>Prefer WhatsApp or email for contact</span>
+                                <small>Use the fastest contact channel for follow-up.</small>
+                              </label>
+                            </div>
+                          </section>
+
+                          <section class="ai-card">
+                            <div class="ai-card-header">
+                              <h4>Escalation & fallback</h4>
+                              <p>Decide when to hand off to a human.</p>
+                            </div>
+                            <div class="ai-field-row">
+                              <label for="ai-escalation-policy">Escalation policy</label>
+                              <select id="ai-escalation-policy">
+                                <option value="never">Never</option>
+                                <option value="user">When user asks</option>
+                                <option value="unsure" selected>When AI is unsure</option>
+                                <option value="complaint">When complaint/negative sentiment detected</option>
+                              </select>
+                            </div>
+                            <div class="ai-field-row">
+                              <label for="ai-fallback-message">Fallback message</label>
+                              <textarea id="ai-fallback-message" name="ai_fallback_message" rows="3" placeholder="Thanks for your message. A human agent will reply soon."></textarea>
+                            </div>
+                          </section>
+
+                          <section class="ai-card ai-instructions-card">
+                            <div class="ai-card-header">
+                              <h4>Assistant instructions</h4>
+                              <p>Write simple, plain-language instructions for your assistant.</p>
+                            </div>
+                            <textarea id="ai-instructions" rows="6" placeholder="You are the assistant for [Company].&#10;Your goal is to help visitors and move them to the next step.&#10;If pricing is not provided in knowledge, ask one short clarifying question and offer to contact us.&#10;Never invent delivery times or guarantees.&#10;If unsure, say you're not sure and offer human support."></textarea>
+                            <button id="ai-compiled-open" class="ghost-btn" type="button">View compiled behavior</button>
+                          </section>
+
+                          <section class="ai-card ai-test-panel">
+                            <div class="ai-card-header">
+                              <h4>Test the assistant</h4>
+                              <p>Ask a customer question to see how the AI responds.</p>
+                            </div>
+                            <textarea id="ai-test-prompt" rows="2" placeholder="Ask a question as a customer..."></textarea>
+                            <div class="ai-test-actions">
+                              <button id="ai-test" class="ghost-btn" type="button">Test</button>
+                            </div>
+                            <div id="ai-test-result" class="ai-test-output"></div>
+                          </section>
+
+                          <textarea id="ai-system-prompt" name="ai_system_prompt" class="ai-hidden" aria-hidden="true"></textarea>
+                        </div>
+                        <div id="ai-compiled-modal" class="settings-modal" hidden>
+                          <div class="settings-modal-card">
+                            <div class="settings-modal-header">
+                              <h4>Compiled behavior (read-only)</h4>
+                              <button id="ai-compiled-close" class="icon-btn" type="button" aria-label="Close">
+                                X
+                              </button>
+                            </div>
+                            <p class="settings-help">
+                              This preview shows how your selections are compiled for the assistant. It is read-only.
+                            </p>
+                            <pre id="ai-compiled-text" class="ai-compiled-preview"></pre>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="ai-tab-section" data-ai-section="advanced">
+                        <div class="ai-advanced-grid">
+                          <section class="ai-card ai-advanced-card">
+                            <div class="ai-card-header">
+                              <h4>Model provider</h4>
+                              <p>Choose provider and model used for customer replies.</p>
+                            </div>
+                            <div class="ai-advanced-fields">
+                              <div>
+                                <label for="ai-provider">Provider</label>
+                                <select id="ai-provider" name="ai_provider">
+                                  <option value="openai">OpenAI</option>
+                                  <option value="ollama">Ollama (local)</option>
+                                </select>
+                              </div>
+                              <div>
+                                <label for="ai-model">Model</label>
+                                <select id="ai-model" name="ai_model">
+                                  <option value="gpt-5.4">gpt-5.4</option>
+                                  <option value="gpt-5.4-pro">gpt-5.4-pro</option>
+                                  <option value="gpt-5-mini">gpt-5-mini</option>
+                                  <option value="gpt-5-nano">gpt-5-nano</option>
+                                  <option value="gpt-4.1">gpt-4.1</option>
+                                  <option value="gpt-4.1-mini">gpt-4.1-mini</option>
+                                  <option value="gpt-4.1-nano">gpt-4.1-nano</option>
+                                  <option value="gpt-4o">gpt-4o</option>
+                                  <option value="gpt-4o-mini">gpt-4o-mini</option>
+                                  <option value="qwen3:8b">qwen3:8b</option>
+                                </select>
+                              </div>
+                            </div>
+                          </section>
+
+                          <section class="ai-card ai-advanced-card">
+                            <div class="ai-card-header">
+                              <h4>Response tuning</h4>
+                              <p>Control creativity, probability spread, and response length.</p>
+                            </div>
+                            <div class="ai-advanced-fields ai-advanced-fields--compact">
+                              <div>
+                                <label for="ai-temperature">Temperature</label>
+                                <input id="ai-temperature" name="ai_temperature" type="number" min="0" max="2" step="0.1" />
+                              </div>
+                              <div>
+                                <label for="ai-top-p">Top P</label>
+                                <input id="ai-top-p" name="ai_top_p" type="number" min="0.1" max="1" step="0.05" />
+                              </div>
+                              <div>
+                                <label for="ai-max-tokens">Max tokens</label>
+                                <input id="ai-max-tokens" name="ai_max_tokens" type="number" min="16" max="2000" step="1" />
+                              </div>
+                            </div>
+                          </section>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ai-tab-panel" data-tab="knowledge">
+              <div class="settings-layout">
+                <div class="settings-stack">
+                  <div class="panel settings-panel" id="ai-faq-panel">
+                    <header class="panel-header">
+                      <div>
+                        <h3>FAQ knowledge</h3>
+                        <p>Add trusted questions and answers the AI can use.</p>
+                      </div>
+                    </header>
+                    <form id="ai-faq-form" class="settings-form settings-grid">
+                      <div class="full-width faq-suggestions">
+                        <span class="settings-help">Priority FAQ chips</span>
+                        <div class="faq-chip-group">
+                          <div class="faq-chip-header">
+                            <span class="faq-chip-title">Core business</span>
+                            <span class="faq-chip-badge is-core">Critical</span>
+                          </div>
+                          <div class="faq-suggestion-list" id="ai-faq-suggestion-list">
+                            <button class="faq-chip is-core" type="button" data-question="What does your company do?">Company overview</button>
+                            <button class="faq-chip is-core" type="button" data-question="What products or services do you offer?">Products / services</button>
+                            <button class="faq-chip is-core" type="button" data-question="What’s included in your offer?">What’s included</button>
+                            <button class="faq-chip is-core" type="button" data-question="Who is this best for?">Who is this for</button>
+                            <button class="faq-chip is-core" type="button" data-question="What makes you different from alternatives?">What makes you different (USP)</button>
+                          </div>
+                        </div>
+                        <div class="faq-chip-group">
+                          <div class="faq-chip-header">
+                            <span class="faq-chip-title">Pricing & commercials</span>
+                            <span class="faq-chip-badge is-pricing">High impact</span>
+                          </div>
+                          <div class="faq-suggestion-list">
+                            <button class="faq-chip is-pricing" type="button" data-question="How does pricing work?">Pricing model</button>
+                            <button class="faq-chip is-pricing" type="button" data-question="What affects the price?">Pricing details</button>
+                            <button class="faq-chip is-pricing" type="button" data-question="What is the minimum order or starting price?">Minimum order / starting price</button>
+                            <button class="faq-chip is-pricing" type="button" data-question="What payment methods do you accept?">Payments</button>
+                            <button class="faq-chip is-pricing" type="button" data-question="What is your refund or cancellation policy?">Refunds / cancellations</button>
+                            <button class="faq-chip is-pricing" type="button" data-question="How do revisions or changes work?">Revisions & changes</button>
+                          </div>
+                        </div>
+                        <div class="faq-chip-group">
+                          <div class="faq-chip-header">
+                            <span class="faq-chip-title">Delivery & process</span>
+                            <span class="faq-chip-badge is-process">Expectation setting</span>
+                          </div>
+                          <div class="faq-suggestion-list">
+                            <button class="faq-chip is-process" type="button" data-question="How long does delivery take?">Delivery time</button>
+                            <button class="faq-chip is-process" type="button" data-question="What is the process from start to finish?">Process (step-by-step)</button>
+                            <button class="faq-chip is-process" type="button" data-question="What do you need from the client to start?">What you need from the client</button>
+                            <button class="faq-chip is-process" type="button" data-question="Do you offer urgent or express delivery?">Urgent / express delivery</button>
+                            <button class="faq-chip is-process" type="button" data-question="What support is available after delivery?">Support after delivery</button>
+                          </div>
+                        </div>
+                        <div class="faq-chip-group">
+                          <div class="faq-chip-header">
+                            <span class="faq-chip-title">Trust & proof</span>
+                            <span class="faq-chip-badge is-trust">Conversion boost</span>
+                          </div>
+                          <div class="faq-suggestion-list">
+                            <button class="faq-chip is-trust" type="button" data-question="Can you share examples or a portfolio?">Examples / portfolio</button>
+                            <button class="faq-chip is-trust" type="button" data-question="Do you have case studies or results?">Case studies / results</button>
+                            <button class="faq-chip is-trust" type="button" data-question="Do you offer guarantees?">Guarantees</button>
+                            <button class="faq-chip is-trust" type="button" data-question="How do you handle data privacy and confidentiality?">Data privacy & confidentiality</button>
+                          </div>
+                        </div>
+                        <div class="faq-chip-group">
+                          <div class="faq-chip-header">
+                            <span class="faq-chip-title">Sales flow & next step</span>
+                            <span class="faq-chip-badge is-next">Closing</span>
+                          </div>
+                          <div class="faq-suggestion-list">
+                            <button class="faq-chip is-next" type="button" data-question="How can I contact you?">How to contact you</button>
+                            <button class="faq-chip is-next" type="button" data-question="What is the next step to get started?">Next step to start</button>
+                            <button class="faq-chip is-next" type="button" data-question="How do I book a call or get a quote?">Book a call / get a quote</button>
+                            <button class="faq-chip is-next" type="button" data-question="How will we communicate during the project?">Communication during the project</button>
+                          </div>
+                        </div>
+                        <details class="faq-chip-group faq-chip-more">
+                          <summary>
+                            <span class="faq-chip-title">Optional / contextual</span>
+                            <span class="faq-chip-badge is-optional">More</span>
+                          </summary>
+                          <div class="faq-suggestion-list">
+                            <button class="faq-chip is-optional" type="button" data-question="Do you work with international clients or ship internationally?">International clients / shipping</button>
+                            <button class="faq-chip is-optional" type="button" data-question="Do you offer samples or demos?">Samples / demo</button>
+                            <button class="faq-chip is-optional" type="button" data-question="Where are you located and what time zone are you in?">Location & time zone</button>
+                            <button class="faq-chip is-optional" type="button" data-question="How do you compare with alternatives?">Comparison with alternatives</button>
+                            <button class="faq-chip is-optional" type="button" data-question="What ROI or results can we expect?">ROI / expected results</button>
+                            <button class="faq-chip is-optional" type="button" data-question="What are common concerns or objections?">Common concerns / objections</button>
+                          </div>
+                        </details>
+                      </div>
+                      <div class="full-width">
+                        <label for="ai-faq-question">Question</label>
+                        <input id="ai-faq-question" type="text" placeholder="How long does delivery take?" list="ai-faq-suggestions" />
+                        <datalist id="ai-faq-suggestions">
+                          <option value="What does your company do?"></option>
+                          <option value="What products or services do you offer?"></option>
+                          <option value="How does pricing work?"></option>
+                          <option value="What affects the price?"></option>
+                          <option value="Do you have a minimum order?"></option>
+                          <option value="How long does delivery take?"></option>
+                          <option value="Do you ship internationally?"></option>
+                          <option value="What payment methods do you accept?"></option>
+                          <option value="How can I contact you?"></option>
+                          <option value="What is the next step to get started?"></option>
+                          <option value="Do you offer samples or demos?"></option>
+                          <option value="What is your refund / return policy?"></option>
+                          <option value="Do you provide design or setup help?"></option>
+                          <option value="What industries do you work with?"></option>
+                          <option value="Do you have sustainability commitments?"></option>
+                        </datalist>
+                      </div>
+                      <div class="full-width">
+                        <label for="ai-faq-answer">Answer</label>
+                        <textarea id="ai-faq-answer" rows="4" placeholder="Write a short, clear answer."></textarea>
+                      </div>
+                      <button type="submit">Add FAQ</button>
+                    </form>
+                    <div id="ai-faq-list" class="popup-list"></div>
+                  </div>
+                </div>
+                <div class="settings-stack">
+                  <!-- Documents: upload files and manage knowledge sources -->
+                  <div class="panel settings-panel" id="ai-docs-panel">
+                    <header class="panel-header">
+                      <div>
+                        <h3>Documents</h3>
+                        <p>Upload supporting files for the assistant.</p>
+                      </div>
+                    </header>
+                    <form id="ai-doc-form" class="settings-form settings-grid doc-form-single" enctype="multipart/form-data">
+                      <div class="full-width">
+                        <label for="ai-doc-title">Title (optional)</label>
+                        <input id="ai-doc-title" name="title" type="text" placeholder="Pricing brochure" />
+                      </div>
+                      <div id="ai-doc-drop" class="doc-drop">
+                        <input id="ai-doc-file" name="file" type="file" hidden />
+                        <div class="doc-drop-inner">
+                          <strong>Drag &amp; drop files here</strong>
+                          <span>or</span>
+                          <button id="ai-doc-browse" type="button" class="ghost-btn">Browse files</button>
+                          <span class="settings-help">Allowed: PDF, DOCX, TXT, XLSX</span>
+                          <span id="ai-doc-selected" class="settings-help" hidden>No file selected</span>
+                        </div>
+                      </div>
+                      <button type="submit">Upload document</button>
+                    </form>
+                    <div id="ai-doc-list" class="popup-list"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ai-tab-panel" data-tab="training">
+              <div class="settings-layout">
+                <div class="settings-stack">
+                  <!-- Fine-tuning: job submission, exports, and job list -->
+                  <div class="panel settings-panel" id="ai-finetune-panel">
+                    <header class="panel-header">
+                      <div>
+                        <h3>Fine-tuning</h3>
+                        <p>Create a tailored OpenAI model with JSONL training data</p>
+                      </div>
+                    </header>
+                    <form id="ai-finetune-form" class="settings-form settings-grid" enctype="multipart/form-data">
+                      <div>
+                        <label for="ai-ft-model">Base model</label>
+                        <input id="ai-ft-model" name="model" type="text" placeholder="gpt-4o-mini" list="ai-ft-models" />
+                        <datalist id="ai-ft-models">
+                          <option value="gpt-4o-mini"></option>
+                          <option value="gpt-4.1"></option>
+                          <option value="gpt-4.1-mini"></option>
+                          <option value="gpt-5.2"></option>
+                        </datalist>
+                      </div>
+                      <div>
+                        <label for="ai-ft-suffix">Model suffix (optional)</label>
+                        <input id="ai-ft-suffix" name="suffix" type="text" placeholder="support-bot" />
+                      </div>
+                      <div>
+                        <label for="ai-ft-training">Training JSONL</label>
+                        <input id="ai-ft-training" name="training_file" type="file" accept=".jsonl,application/json,text/plain" />
+                      </div>
+                      <div>
+                        <label for="ai-ft-validation">Validation JSONL (optional)</label>
+                        <input id="ai-ft-validation" name="validation_file" type="file" accept=".jsonl,application/json,text/plain" />
+                      </div>
+                      <div class="settings-inline">
+                        <button type="submit">Start fine-tune</button>
+                        <button id="ai-ft-refresh" class="ghost-btn" type="button">Refresh jobs</button>
+                      </div>
+                    </form>
+                    <div id="ai-ft-help" class="settings-help">
+                      Upload JSONL files in OpenAI fine-tuning format. Use one example per line.
+                    </div>
+                    <div class="settings-block full-width">
+                      <div class="settings-inline">
+                        <label>Training data export</label>
+                        <label class="inline-check">
+                          <input id="ai-export-faqs" type="checkbox" checked />
+                          FAQs
+                        </label>
+                        <label class="inline-check">
+                          <input id="ai-export-chats" type="checkbox" checked />
+                          Chats
+                        </label>
+                      </div>
+                      <div>
+                        <label for="ai-export-limit">Max samples</label>
+                        <input id="ai-export-limit" type="number" min="10" max="500" value="200" />
+                      </div>
+                      <div class="settings-inline">
+                        <button id="ai-export-jsonl" class="ghost-btn" type="button">Download JSONL</button>
+                        <button id="ai-export-preferences" class="ghost-btn" type="button">Download preference JSONL</button>
+                      </div>
+                    </div>
+                    <div id="ai-ft-jobs" class="popup-list"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+

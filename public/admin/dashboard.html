@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OnlineChat Admin</title>
+    <link rel="stylesheet" href="styles.css?v=20260306" />
+    <script>
+      const isLocalAdmin =
+        !window.location.hostname ||
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1";
+      window.OnlineChatAdminConfig = {
+        apiBase: isLocalAdmin ? "http://localhost/hotel-tech/apps/chat/api/public/api" : "/api"
+      };
+    </script>
+    <script defer src="js/shared.js?v=20260306"></script>
+    <script defer src="js/login.js?v=20260306"></script>
+    <script defer src="js/dashboard/analytics.js?v=20260306"></script>
+    <script defer src="js/dashboard/chat.js?v=20260306"></script>
+    <script defer src="js/dashboard/leads.js?v=20260306"></script>
+    <script defer src="js/dashboard/settings.js?v=20260306"></script>
+    <script defer src="js/dashboard/ai.js?v=20260306"></script>
+    <script defer src="js/dashboard/context-utils.js?v=20260310"></script>
+    <script defer src="js/dashboard/state.js?v=20260306"></script>
+    <script defer src="js/dashboard/elements.js?v=20260306"></script>
+    <script defer src="js/dashboard/ui-utils.js?v=20260306"></script>
+    <script defer src="js/dashboard.js?v=20260306"></script>
+    <script defer src="app.js?v=20260306"></script>
+  </head>
+  <body data-page="dashboard">
+    <div class="dashboard-shell">
+      <!-- Extracted: Sidebar navigation/status/actions for maintainability. -->
+      <div data-include="partials/dashboard/sidebar.html"></div>
+      <main class="dashboard-main">
+        <!-- Extracted: Top alert bar to keep layout sections separated. -->
+        <div data-include="partials/dashboard/topbar.html"></div>
+
+        <!-- Extracted: Dashboard analytics view. -->
+        <div data-include="partials/dashboard/view-dashboard.html"></div>
+        <!-- Extracted: Inbox view (visitors + chat). -->
+        <div data-include="partials/dashboard/view-inbox.html"></div>
+        <!-- Extracted: Leads view. -->
+        <div data-include="partials/dashboard/view-leads.html"></div>
+        <!-- Extracted: AI configuration view. -->
+        <div data-include="partials/dashboard/view-ai.html"></div>
+        <!-- Extracted: Settings view. -->
+        <div data-include="partials/dashboard/view-settings.html"></div>
+      </main>
+      <!-- Extracted: Toast stack. -->
+      <div data-include="partials/dashboard/toast.html"></div>
+    </div>
+    <script src="js/include-partials.js"></script>
+  </body>
+</html>

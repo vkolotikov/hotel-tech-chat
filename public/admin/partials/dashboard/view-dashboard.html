@@ -1,0 +1,94 @@
+        <section class="view" data-view="dashboard">
+          <div class="section-header">
+            <h2>Dashboard</h2>
+            <p>Live overview</p>
+          </div>
+          <section class="metrics" id="metric-cards">
+            <div class="metric-card">
+              <span>Active chats</span>
+              <strong id="metric-active">0</strong>
+            </div>
+            <div class="metric-card">
+              <span>Unread messages</span>
+              <strong id="metric-unread">0</strong>
+            </div>
+            <div class="metric-card">
+              <span>Offline messages</span>
+              <strong id="metric-offline">0</strong>
+            </div>
+            <div class="metric-card">
+              <span>Leads captured</span>
+              <strong id="metric-leads">0</strong>
+            </div>
+          </section>
+          <div class="section-header">
+            <div>
+              <h2>Analytics</h2>
+              <p>Visual overview</p>
+            </div>
+          </div>
+          <div class="analytics-filters">
+            <div class="filter-group">
+              <label for="analytics-range">Range</label>
+              <select id="analytics-range">
+                <option value="7">Last 7 days</option>
+                <option value="30">Last 30 days</option>
+                <option value="90">Last 90 days</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="analytics-group">Group by</label>
+              <select id="analytics-group">
+                <option value="day">Day</option>
+                <option value="week">Week</option>
+                <option value="month">Month</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="analytics-agent">Assignee</label>
+              <select id="analytics-agent"></select>
+            </div>
+            <div class="filter-group">
+              <label for="analytics-sort">Sort agents</label>
+              <select id="analytics-sort">
+                <option value="chats">Chats accepted</option>
+                <option value="leads">Leads captured</option>
+                <option value="name">Name</option>
+              </select>
+            </div>
+          </div>
+          <section class="analytics-grid">
+            <div class="panel chart-panel">
+              <div class="panel-header">
+                <div>
+                  <h3>Interactions by date</h3>
+                  <p>Replied vs not replied, with leads</p>
+                </div>
+                <span id="badge-interactions" class="badge">Last 7 days</span>
+              </div>
+              <div class="chart-summary" id="summary-interactions"></div>
+              <div class="chart-legend">
+                <span><i class="dot dot-replied"></i>Replied</span>
+                <span><i class="dot dot-unreplied"></i>Not replied</span>
+                <span><i class="dot dot-leads"></i>Leads</span>
+              </div>
+              <canvas id="chart-interactions" width="920" height="220" aria-label="Interactions chart" role="img"></canvas>
+            </div>
+            <div class="panel chart-panel">
+              <div class="panel-header">
+                <div>
+                  <h3>Team performance</h3>
+                  <p>Chats accepted and leads captured</p>
+                </div>
+                <span id="badge-agents" class="badge">Last 30 days</span>
+              </div>
+              <div class="chart-summary" id="summary-agents"></div>
+              <div class="chart-legend">
+                <span><i class="dot dot-chats"></i>Chats accepted</span>
+                <span><i class="dot dot-agent-leads"></i>Leads captured</span>
+              </div>
+              <canvas id="chart-agents" width="920" height="220" aria-label="Agent performance chart" role="img"></canvas>
+            </div>
+          </section>
+        </section>
+

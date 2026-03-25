@@ -1,0 +1,9 @@
+/* Admin CSS split: keep import order to preserve the original cascade. */
+/* base -> layout -> inbox -> settings-base -> leads -> settings -> utilities */
+@import url("css/base.css");
+@import url("css/layout.css");
+@import url("css/inbox.css");
+@import url("css/settings-base.css");
+@import url("css/leads.css");
+@import url("css/settings.css");
+@import url("css/utilities.css");

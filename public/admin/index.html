@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OnlineChat Admin Login</title>
+    <link rel="stylesheet" href="styles.css?v=20260323" />
+
+    <script>
+      const isLocalAdmin =
+        !window.location.hostname ||
+        window.location.hostname === "localhost" ||
+        window.location.hostname === "127.0.0.1";
+      window.OnlineChatAdminConfig = {
+        apiBase: isLocalAdmin ? "http://localhost/hotel-tech/apps/chat/api/public/api" : "/api"
+      };
+    </script>
+    <script defer src="js/shared.js?v=20260323"></script>
+    <script defer src="js/login.js?v=20260323"></script>
+    <script defer src="app.js?v=20260323"></script>
+  </head>
+  <body data-page="login">
+    <main class="login-shell">
+      <div class="login-stage-bg" aria-hidden="true">
+        <span class="login-stage-orb login-stage-orb-a"></span>
+        <span class="login-stage-orb login-stage-orb-b"></span>
+        <span class="login-stage-grid"></span>
+      </div>
+      <section class="login-card login-card-split">
+        <div class="login-brand-panel">
+          <div class="brand login-brand">
+            <div class="brand-mark">OC</div>
+            <span class="login-brand-name">OnlineChat</span>
+          </div>
+          <span class="login-kicker">Premium chat workspace</span>
+          <div class="login-head">
+            <h1>Launch your AI chat in minutes</h1>
+            <p>Sign in to manage your chat widget.</p>
+          </div>
+          <div class="login-benefits">
+            <article class="login-benefit-card">
+              <span class="login-benefit-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M7 5h10M7 12h10M7 19h7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <strong>Easy setup</strong>
+              <p>One account for all tools.</p>
+            </article>
+            <article class="login-benefit-card">
+              <span class="login-benefit-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 4v4m0 8v4m8-8h-4M8 12H4m13.7 5.7-2.8-2.8M9.1 9.1 6.3 6.3m11.4 0-2.8 2.8M9.1 14.9l-2.8 2.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <strong>Free trial</strong>
+              <p>No setup friction.</p>
+            </article>
+            <article class="login-benefit-card">
+              <span class="login-benefit-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 3 5 6v5c0 4.2 2.6 8 7 10 4.4-2 7-5.8 7-10V6l-7-3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+                  <path d="m9.2 12 1.9 1.9 3.8-4.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <strong>Secure access</strong>
+              <p>Your workspace stays protected.</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="login-auth-panel">
+          <section class="login-auth-card">
+            <div class="login-auth-head">
+              <span class="login-auth-label">Admin access</span>
+              <h2>Sign in to your workspace</h2>
+              <p>Use your SaaS platform account credentials.</p>
+            </div>
+
+            <form id="login-form" autocomplete="on" class="auth-form" role="region" aria-label="Admin sign in">
+              <div class="input-group">
+                <label for="login-email">Email</label>
+                <input id="login-email" type="email" name="email" required autocomplete="email" placeholder="you@hotel.com" />
+              </div>
+              <div class="input-group">
+                <label for="login-password">Password</label>
+                <input id="login-password" type="password" name="password" required autocomplete="current-password" placeholder="Enter your password" />
+              </div>
+              <button id="login-submit" type="submit" class="primary-btn">Sign In</button>
+            </form>
+
+            <div id="auth-progress" class="auth-progress" hidden>
+              <span class="auth-progress-dot" aria-hidden="true"></span>
+              <span id="auth-progress-text">Signing in...</span>
+            </div>
+
+            <div class="login-auth-meta">
+              <a id="forgot-password-link" href="/forgot-password" target="_blank">Forgot password?</a>
+              <span>&middot;</span>
+              <a id="register-link" href="/register" target="_blank">Create account</a>
+            </div>
+            <div id="login-error" class="login-error" aria-live="polite"></div>
+          </section>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

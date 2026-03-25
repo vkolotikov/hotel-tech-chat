@@ -1,0 +1,259 @@
+        <section class="view active" data-view="inbox">
+          <div class="inbox-layout compact">
+            <div class="inbox-column inbox-left">
+              <div class="panel inbox-workspace">
+                <div class="inbox-left-header">
+                  <div class="inbox-left-tabs" role="tablist" aria-label="Inbox workspace">
+                    <button
+                      id="inbox-tab-chats"
+                      class="inbox-tab is-active"
+                      type="button"
+                      role="tab"
+                      aria-selected="true"
+                      aria-controls="inbox-pane-chats"
+                      data-tab="chats"
+                    >
+                      <span>Chats</span>
+                      <span id="inbox-tab-count-chats" class="inbox-tab-count">0</span>
+                    </button>
+                    <button
+                      id="inbox-tab-live"
+                      class="inbox-tab"
+                      type="button"
+                      role="tab"
+                      aria-selected="false"
+                      aria-controls="inbox-pane-live"
+                      data-tab="live"
+                    >
+                      <span>Live</span>
+                      <span id="inbox-tab-count-live" class="inbox-tab-count">0</span>
+                    </button>
+                  </div>
+                  <button
+                    id="inbox-left-toggle"
+                    class="icon-btn inbox-left-toggle"
+                    type="button"
+                    aria-label="Collapse inbox sidebar"
+                    aria-expanded="true"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M14.5 6l-6 6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                </div>
+
+                <div id="inbox-pane-chats" class="inbox-left-pane inbox-left-pane-chats is-active" role="tabpanel" aria-labelledby="inbox-tab-chats">
+                  <label class="chat-search-field" for="chat-search">
+                    <span class="chat-search-label">Search</span>
+                    <input id="chat-search" type="search" placeholder="Search name, email, company..." autocomplete="off" />
+                  </label>
+
+                  <div class="chat-filters compact">
+                    <div class="chat-filter-field">
+                      <span>Scope</span>
+                      <div class="chat-scope-toggle" role="group" aria-label="Chat scope">
+                        <button type="button" class="scope-btn" data-scope="accepted">Accepted</button>
+                        <button type="button" class="scope-btn" data-scope="all">All chats</button>
+                      </div>
+                      <!-- Keep the select (hidden) so existing JS bindings stay stable. -->
+                      <select id="chat-filter-scope" class="sr-only" aria-hidden="true" tabindex="-1">
+                        <option value="accepted" selected>Accepted</option>
+                        <option value="all">All chats</option>
+                      </select>
+                    </div>
+                    <label class="chat-filter-field" for="chat-filter-presence">
+                      <span>Status</span>
+                      <select id="chat-filter-presence">
+                        <option value="all" selected>All</option>
+                        <option value="online">Online</option>
+                        <option value="offline">Offline</option>
+                      </select>
+                    </label>
+                    <label class="chat-filter-field" for="chat-filter-range">
+                      <span>Period</span>
+                      <select id="chat-filter-range">
+                        <option value="today" selected>Today</option>
+                        <option value="week">Last 7 days</option>
+                        <option value="month">Last 30 days</option>
+                        <option value="all">All time</option>
+                      </select>
+                    </label>
+                  </div>
+                  <div id="chat-filter-meta" class="chat-meta chat-filter-meta">0 chats shown</div>
+                  <div id="chat-list" class="chat-list"></div>
+                </div>
+
+                <div id="inbox-pane-live" class="inbox-left-pane inbox-left-pane-live" role="tabpanel" aria-labelledby="inbox-tab-live">
+                  <div class="panel-alerts">
+                    <button id="signal-pill" class="signal-pill compact" type="button" aria-live="polite" title="Alerts">
+                      No new alerts
+                    </button>
+                  </div>
+                  <div class="panel-header">
+                    <div>
+                      <h3>Live visitors</h3>
+                      <p><span id="visitor-count">0</span> on site</p>
+                    </div>
+                    <button id="refresh-visitors" type="button">Refresh</button>
+                  </div>
+                  <div id="visitor-list" class="visitor-list compact"></div>
+                </div>
+              </div>
+            </div>
+            <div class="panel inbox-main">
+              <button
+                id="inbox-left-reopen"
+                class="icon-btn inbox-left-reopen"
+                type="button"
+                aria-label="Expand inbox sidebar"
+                aria-expanded="false"
+                hidden
+              >
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M9.5 6l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <div class="chat-topbar">
+                <div id="chat-meta" class="chat-meta">Select a chat to view messages.</div>
+                <button id="details-toggle" class="icon-btn chat-details-btn" type="button" aria-expanded="false" aria-label="Customer details">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/>
+                    <path d="M12 10v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                    <path d="M12 7h.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                  </svg>
+                </button>
+              </div>
+              <select id="assign-agent" class="assign-hidden" aria-hidden="true"></select>
+              <div id="chat-messages" class="chat-messages"></div>
+                <div class="chat-input">
+                  <button id="chat-attach" class="icon-btn" type="button" aria-label="Attach file">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M7.5 12.5l6.2-6.2a3 3 0 114.3 4.3l-7.1 7.1a4.5 4.5 0 01-6.4-6.4l7.2-7.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </button>
+                  <div class="emoji-picker">
+                    <button id="chat-emoji" class="icon-btn" type="button" aria-label="Insert emoji">
+                      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/>
+                        <path d="M8.5 14.5c.9 1 2.1 1.5 3.5 1.5s2.6-.5 3.5-1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                        <circle cx="9" cy="10" r="1" fill="currentColor"/>
+                        <circle cx="15" cy="10" r="1" fill="currentColor"/>
+                      </svg>
+                    </button>
+                    <div id="emoji-panel" class="emoji-panel" hidden></div>
+                  </div>
+                  <input id="chat-file" type="file" hidden />
+                  <textarea id="chat-reply" rows="2" placeholder="Write a reply..."></textarea>
+                  <button id="send-reply" type="button">Send</button>
+                </div>
+              <button id="resolve-chat" class="resolve-btn" type="button" hidden>Mark resolved</button>
+            </div>
+            <aside id="details-drawer" class="details-drawer" aria-hidden="true">
+              <div class="details-drawer-header">
+                <div class="details-drawer-spacer"></div>
+                <button id="details-close" class="icon-btn" type="button" aria-label="Close details">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path
+                      d="M6 6l12 12M18 6l-12 12"
+                      stroke="currentColor"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div class="details-drawer-body">
+                <div class="customer-card">
+                  <div class="panel-header">
+                    <div>
+                      <h3>Customer</h3>
+                      <p>Update contact info and notes</p>
+                    </div>
+                    <label class="important-toggle compact">
+                      <input id="chat-important" type="checkbox" />
+                      <span class="toggle-pill">Important</span>
+                    </label>
+                  </div>
+                  <form id="chat-details-form" class="details-form">
+                    <div class="details-grid">
+                      <div>
+                        <label class="field-label" for="chat-name">
+                          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M12 12a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" stroke-width="1.6"/>
+                            <path d="M5 20a7 7 0 0114 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                          </svg>
+                          <span class="sr-only">Name</span>
+                        </label>
+                        <input id="chat-name" type="text" placeholder="Name" />
+                      </div>
+                      <div>
+                        <label class="field-label" for="chat-email">
+                          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M4 6h16a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2z" stroke="currentColor" stroke-width="1.6"/>
+                            <path d="M4 8l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                          <span class="sr-only">Email</span>
+                        </label>
+                        <input id="chat-email" type="email" placeholder="Email" />
+                      </div>
+                      <div>
+                        <label class="field-label" for="chat-company">
+                          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M4 10h16v8H4v-8zM7 10V6h10v4" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                          </svg>
+                          <span class="sr-only">Company</span>
+                        </label>
+                        <input id="chat-company" type="text" placeholder="Company" />
+                      </div>
+                      <div>
+                        <label class="field-label" for="chat-phone">
+                          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M5 4h5l2 5-3 2a12 12 0 006 6l2-3 5 2v5a2 2 0 01-2 2c-9.4 0-17-7.6-17-17a2 2 0 012-2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                          </svg>
+                          <span class="sr-only">Phone</span>
+                        </label>
+                        <input id="chat-phone" type="text" placeholder="Phone" />
+                      </div>
+                      <div>
+                        <label class="field-label" for="chat-notes">
+                          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                            <path d="M5 6h14M5 12h14M5 18h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                          </svg>
+                          <span class="sr-only">Notes</span>
+                        </label>
+                        <textarea id="chat-notes" rows="2" placeholder="Notes"></textarea>
+                      </div>
+                    </div>
+                    <div class="details-actions">
+                      <button id="chat-save-details" type="submit" class="icon-action" aria-label="Save details">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <path d="M5 5h10l4 4v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                          <path d="M7 5v6h8V5" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Save</span>
+                      </button>
+                      <button id="chat-delete" type="button" class="icon-action danger" aria-label="Delete chat">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <path d="M6 7h12M9 7V5h6v2M8 7l1 12h6l1-12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+                        </svg>
+                        <span>Delete</span>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+                <div class="visitor-context">
+                  <div class="panel-header">
+                    <div>
+                      <h3>Visitor journey</h3>
+                      <p id="visitor-flow-meta">Select a visitor to see their path.</p>
+                    </div>
+                    <span class="badge">Current session</span>
+                  </div>
+                  <div id="visitor-flow" class="visitor-flow compact"></div>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+  
