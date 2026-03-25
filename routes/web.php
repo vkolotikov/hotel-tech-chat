@@ -2,27 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 
-function serveAdminPage(string $filename = 'index'): \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
-{
-    $htmlPath = public_path("admin/{$filename}.html");
-    if (! file_exists($htmlPath)) {
-        $htmlPath = public_path('admin/index.html');
-    }
-    if (! file_exists($htmlPath)) {
-        return response('Admin panel not found.', 404);
-    }
+// Redirect to static HTML files served directly by nginx.
+// When browser is at /admin/index.html, relative assets like
+// "styles.css" resolve to /admin/styles.css — which nginx serves
+// from public/admin/styles.css. No PHP injection needed.
 
-    // Inject <base href="/admin/"> so relative asset paths resolve correctly
-    $html = file_get_contents($htmlPath);
-    $html = str_replace('<head>', '<head><base href="/admin/">', $html);
+Route::get('/', fn () => redirect('/admin/index.html', 302));
+Route::get('/admin', fn () => redirect('/admin/index.html', 302));
+Route::get('/admin/', fn () => redirect('/admin/index.html', 302));
 
-    return response($html, 200, ['Content-Type' => 'text/html; charset=utf-8']);
-}
-
-Route::get('/', fn () => redirect('/admin/'));
-
-Route::get('/admin', fn () => redirect('/admin/'));
-
-Route::get('/admin/', fn () => serveAdminPage('index'));
-
-Route::get('/admin/{page}', fn (string $page) => serveAdminPage($page));
+Route::get('/admin/{page}', function (string $page) {
+    $file = public_path("admin/{$page}.html");
+    return redirect(file_exists($file) ? "/admin/{$page}.html" : '/admin/index.html', 302);
+})->where('page', '[a-z\-]+');
