@@ -216,14 +216,14 @@ class AdminController extends Controller
     public function me(Request $request): JsonResponse
     {
         $user = $request->attributes->get('auth_user');
-        return response()->json($user->only('id', 'email', 'display_name', 'role', 'avatar_url', 'is_online'));
+        return response()->json(['user' => $user->only('id', 'email', 'display_name', 'role', 'avatar_url', 'is_online')]);
     }
 
     public function updateMe(Request $request): JsonResponse
     {
         $user = $request->attributes->get('auth_user');
         $user->update($request->only('display_name', 'email'));
-        return response()->json($user->only('id', 'email', 'display_name', 'role', 'avatar_url', 'is_online'));
+        return response()->json(['user' => $user->only('id', 'email', 'display_name', 'role', 'avatar_url', 'is_online')]);
     }
 
     public function uploadMyAvatar(Request $request): JsonResponse
@@ -312,9 +312,9 @@ class AdminController extends Controller
             ->with(['visitor:id,name,email,country,city', 'website:id,name,domain', 'assignedUser:id,display_name,avatar_url'])
             ->withCount('messages')
             ->orderByDesc('last_message_at')
-            ->paginate($request->input('per_page', 20));
+            ->paginate($request->input('per_page', 100));
 
-        return response()->json($chats);
+        return response()->json(['chats' => $chats->items()]);
     }
 
     public function chatAlerts(Request $request): JsonResponse
@@ -542,9 +542,9 @@ class AdminController extends Controller
         $leads = Lead::whereIn('website_id', $websiteIds)
             ->with('website:id,name')
             ->orderByDesc('created_at')
-            ->paginate($request->input('per_page', 20));
+            ->paginate($request->input('per_page', 100));
 
-        return response()->json($leads);
+        return response()->json(['leads' => $leads->items()]);
     }
 
     public function updateLead(int $leadId, Request $request): JsonResponse
@@ -661,7 +661,7 @@ class AdminController extends Controller
     {
         $companyId = $request->input('company_id') ?? $request->attributes->get('tenant_company_id');
         $websites  = Website::where('company_id', $companyId)->withCount('visitors', 'sessions')->get();
-        return response()->json($websites);
+        return response()->json(['websites' => $websites]);
     }
 
     public function createWebsite(Request $request): JsonResponse
@@ -692,7 +692,7 @@ class AdminController extends Controller
     public function listCannedReplies(Request $request): JsonResponse
     {
         $companyId = $request->attributes->get('tenant_company_id');
-        return response()->json(CannedReply::where('company_id', $companyId)->get());
+        return response()->json(['replies' => CannedReply::where('company_id', $companyId)->get()]);
     }
 
     public function storeCannedReply(Request $request): JsonResponse
@@ -731,7 +731,7 @@ class AdminController extends Controller
         if ($websiteId) {
             $query->where('website_id', $websiteId);
         }
-        return response()->json($query->get());
+        return response()->json(['rules' => $query->get()]);
     }
 
     public function storePopupRule(Request $request): JsonResponse
@@ -767,7 +767,7 @@ class AdminController extends Controller
     public function listFaqs(Request $request): JsonResponse
     {
         $companyId = $request->attributes->get('tenant_company_id');
-        return response()->json(AiFaq::where('company_id', $companyId)->get());
+        return response()->json(['faqs' => AiFaq::where('company_id', $companyId)->get()]);
     }
 
     public function storeFaq(Request $request): JsonResponse
@@ -812,7 +812,7 @@ class AdminController extends Controller
     public function listDocuments(Request $request): JsonResponse
     {
         $companyId = $request->attributes->get('tenant_company_id');
-        return response()->json(AiDocument::where('company_id', $companyId)->get());
+        return response()->json(['docs' => AiDocument::where('company_id', $companyId)->get()]);
     }
 
     public function uploadDocument(Request $request): JsonResponse
@@ -920,7 +920,7 @@ class AdminController extends Controller
     {
         $companyId = $request->attributes->get('tenant_company_id');
         // Fine-tunes are not stored locally yet — return empty list
-        return response()->json([]);
+        return response()->json(['jobs' => []]);
     }
 
     public function uploadFineTune(Request $request): JsonResponse
