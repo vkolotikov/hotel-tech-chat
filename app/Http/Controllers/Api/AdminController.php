@@ -560,18 +560,26 @@ class AdminController extends Controller
     {
         $companyId = $request->attributes->get('tenant_company_id');
         $settings  = Setting::where('company_id', $companyId)->pluck('value', 'key_name');
-        return response()->json($settings);
+        return response()->json(['settings' => $settings]);
     }
 
     public function updateSettings(Request $request): JsonResponse
     {
         $companyId = $request->attributes->get('tenant_company_id');
-        $items     = $request->input('settings', []);
+
+        // Accept both flat payload {"ai_enabled":true,...} and nested {"settings":{...}}
+        $items = $request->input('settings');
+        if (!is_array($items)) {
+            $items = $request->except(['_token', '_method']);
+        }
 
         foreach ($items as $key => $value) {
+            if (is_bool($value)) {
+                $value = $value ? '1' : '0';
+            }
             Setting::updateOrCreate(
                 ['company_id' => $companyId, 'key_name' => $key],
-                ['value' => $value]
+                ['value' => is_null($value) ? '' : (string) $value]
             );
         }
 
@@ -592,11 +600,17 @@ class AdminController extends Controller
 
     public function updateWebsiteSettings(Request $request, int $websiteId): JsonResponse
     {
-        $items = $request->input('settings', []);
+        $items = $request->input('settings');
+        if (!is_array($items)) {
+            $items = $request->except(['_token', '_method']);
+        }
         foreach ($items as $key => $value) {
+            if (is_bool($value)) {
+                $value = $value ? '1' : '0';
+            }
             WebsiteSetting::updateOrCreate(
                 ['website_id' => $websiteId, 'key_name' => $key],
-                ['value' => $value]
+                ['value' => is_null($value) ? '' : (string) $value]
             );
         }
         return response()->json(['message' => 'Website settings updated']);

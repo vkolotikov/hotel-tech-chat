@@ -3268,7 +3268,7 @@ const createSettingsModule = (context) => {
     }
     if (elements.settingsVoiceEnabled) {
       elements.settingsVoiceEnabled.checked = Boolean(Number(settings.voice_mode_enabled || 0));
-      elements.settingsVoiceEnabled.disabled = !Boolean(settings.voice_openai_available);
+      elements.settingsVoiceEnabled.disabled = !Boolean(Number(settings.voice_openai_available || 0));
     }
     if (elements.settingsVoiceSelect) {
       elements.settingsVoiceSelect.value = settings.voice_reply_voice || "alloy";
@@ -3290,10 +3290,10 @@ const createSettingsModule = (context) => {
     if (elements.settingsVoiceGlossary) {
       elements.settingsVoiceGlossary.value = settings.voice_input_glossary || "";
     }
-    elements.statusToggle.checked = Boolean(settings.is_online);
-    elements.statusLabel.textContent = settings.is_online ? "Online" : "Offline";
-    elements.statusLabel.classList.toggle("is-online", Boolean(settings.is_online));
-    setAiEnabled(Boolean(settings.ai_enabled));
+    elements.statusToggle.checked = Boolean(Number(settings.is_online || 0));
+    elements.statusLabel.textContent = Number(settings.is_online || 0) ? "Online" : "Offline";
+    elements.statusLabel.classList.toggle("is-online", Boolean(Number(settings.is_online || 0)));
+    setAiEnabled(Boolean(Number(settings.ai_enabled || 0)));
     if (elements.aiProvider) {
       elements.aiProvider.value = settings.ai_provider || "openai";
     }
@@ -3340,9 +3340,9 @@ const createSettingsModule = (context) => {
       const maxTokens = clampNumber(settings.ai_max_tokens, 16, 2000, 160);
       elements.aiMaxTokens.value = String(Math.round(maxTokens));
     }
-    elements.statusLabel.classList.toggle("is-online", Boolean(settings.is_online));
+    elements.statusLabel.classList.toggle("is-online", Boolean(Number(settings.is_online || 0)));
     if (elements.hoursEnabled) {
-      elements.hoursEnabled.checked = Boolean(settings.business_hours_enabled);
+      elements.hoursEnabled.checked = Boolean(Number(settings.business_hours_enabled || 0));
     }
     if (elements.timezoneInput) {
       elements.timezoneInput.value = settings.business_timezone || "UTC";
