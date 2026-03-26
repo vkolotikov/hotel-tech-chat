@@ -2,18 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/{any}', function () {
+$serveSpa = function () {
     $spaPath = public_path('spa/index.html');
     if (file_exists($spaPath)) {
         return response()->file($spaPath, ['Content-Type' => 'text/html']);
     }
-    return response('Not deployed yet', 404);
-})->where('any', '^(?!api/).*$');
+    return response()->json([
+        'status' => 'building',
+        'message' => 'Frontend not yet deployed. Run: cd frontend && npm run build:prod && cp -r dist ../public/spa',
+        'spa_path' => public_path('spa/index.html'),
+    ], 200);
+};
 
-Route::get('/', function () {
-    $spaPath = public_path('spa/index.html');
-    if (file_exists($spaPath)) {
-        return response()->file($spaPath, ['Content-Type' => 'text/html']);
-    }
-    return response('Not deployed yet', 404);
-});
+Route::get('/', $serveSpa);
+Route::get('/{any}', $serveSpa)->where('any', '^(?!api/).*$');
