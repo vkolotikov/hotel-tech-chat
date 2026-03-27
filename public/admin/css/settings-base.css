@@ -29,9 +29,9 @@
 .ai-avatar {
   width: 40px;
   height: 40px;
-  border-radius: 12px;
-  border: 1px solid var(--border-strong);
-  background: rgba(15, 23, 42, 0.6);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface-muted);
   color: var(--ink);
   font-weight: 600;
   display: grid;
@@ -49,9 +49,9 @@
 
 .settings-block {
   padding: 12px;
-  border-radius: 14px;
-  border: 1px dashed var(--border);
-  background: rgba(15, 23, 42, 0.4);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface-muted);
   display: grid;
   gap: 12px;
 }
@@ -75,21 +75,21 @@
 
 .hours-row input[type="checkbox"] {
   accent-color: var(--brand);
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
 }
 
 .hours-row input[type="time"] {
   padding: 6px 8px;
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid var(--border-strong);
-  background: rgba(15, 23, 42, 0.6);
+  background: var(--surface-strong);
   color: var(--ink);
+  font-size: 13px;
 }
 
 .settings-divider {
   height: 1px;
   background: var(--border);
-  margin: 12px 0;
+  margin: 10px 0;
 }
-
